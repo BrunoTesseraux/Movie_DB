@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 const FetchMovies = () => {
   const [allMovies, setAllMovies] = useState([]);
+  const [config, setConfig] = useState([]);
+  const [genres, setGenres] = useState([]);
   // const pageIndex = 1;
 
   const options = {
@@ -23,22 +25,44 @@ const FetchMovies = () => {
       )
         .then((response) => response.json())
         .then((moviesData) => {
-          console.log(moviesData.total_pages);
-          newMovies = newMovies.concat(moviesData?.results); // concat movies to temporary array
+          newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
           // get 5 pages from the api -> One Page have 20 Objects in an Array
-          if (pageIndex === 200) {
+          if (pageIndex === 400) {
             setAllMovies(newMovies); // set the state on the end of the bottom for loop
           }
         })
         .catch((error) => console.log(error));
     };
 
-    for (let i = 1; i <= 200; i++) {
+    for (let i = 1; i <= 400; i++) {
       fetchMovies(i);
     }
   }, []);
 
-  console.log(allMovies);
+  useEffect(() => {
+    const fetchConfig = () => {
+      fetch("https://api.themoviedb.org/3/configuration", options)
+        .then((response) => response.json())
+        .then((configData) => setConfig(configData));
+    };
+    fetchConfig();
+  }, []);
+
+  useEffect(() => {
+    const fetchGenre = () => {
+      fetch("https://api.themoviedb.org/3/genre/movie/list", options)
+        .then((response) => response.json())
+        .then((genreData) => setGenres(genreData));
+    };
+    fetchGenre();
+  }, []);
+
+  if (allMovies !== undefined) {
+    console.log(allMovies);
+  }
+
+  console.log(config);
+  console.log(genres);
 
   return <div></div>;
 };
