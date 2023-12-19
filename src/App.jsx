@@ -20,6 +20,7 @@ function App() {
     <>
       <MovieContextProvider>
         <FetchMovies />
+
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

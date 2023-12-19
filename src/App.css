@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "Poppins-XBd";
+  src: url(./fonts/Poppins-ExtraBold.ttf);
+}
+@font-face {
+  font-family: "Poppins-Bd";
+  src: url(./fonts/Poppins-Bold.ttf);
+}
+@font-face {
+  font-family: "Poppins-Md";
+  src: url(./fonts/Poppins-Medium.ttf);
+}
+@font-face {
+  font-family: "Poppins-Rg";
+  src: url(./fonts/Poppins-Regular.ttf);
+}
+@font-face {
+  font-family: "Poppins-Lt";
+  src: url(./fonts/Poppins-Light.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;

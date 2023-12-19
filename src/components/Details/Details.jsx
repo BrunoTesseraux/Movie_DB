@@ -1,20 +1,24 @@
 import { useParams } from "react-router-dom";
 import "./Details.scss";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Button from "../Button/Button";
 import play from "./../../assets/icons/play.svg";
 import rating from "./../../assets/icons/rating.svg";
+import ButtonIconOnly from "../Button/ButtonIconOnly";
+import back from "./../../assets/icons/back.svg";
+import save from "./../../assets/icons/save.svg";
+import download from "./../../assets/icons/download.svg";
 
 const Details = () => {
-  const { allMovies } = useContext(MovieContext);
+  const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
   console.log(allMovies);
 
   const { config } = useContext(MovieContext);
   console.log(config);
 
-  const { fetchGenre } = useContext(MovieContext);
-  console.log(fetchGenre);
+  const { genres } = useContext(MovieContext);
+  console.log(genres);
 
   const selectedMoviePath = useParams();
   console.log(selectedMoviePath);
@@ -28,6 +32,45 @@ const Details = () => {
   console.log(selectedMovieInfos);
 
   const [video, setVideo] = useState();
+  const [openParagraph, setOpenParagraph] = useState(false);
+
+  // Neu
+  // Fetching environment variable for bearer token
+  const bearerToken = import.meta.env
+    .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
+
+  // Defining fetch options with authentication headers
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${bearerToken}`,
+      },
+    };
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${selectedMovieID}?language=en-US`,
+      options
+    )
+      .then((response) => response.json())
+      .then((movieDetailsObj) => {
+        // Updating movie details in context
+        setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+      })
+      .catch((error) => console.log(error));
+  }, [selectedMovieID, setMovieDetails]);
+
+  // // Destructuring movie properties
+  // const {
+  //   title,
+  //   backdrop_path,
+  //   release_date,
+  //   runtime,
+  //   vote_average: rating,
+  // } = movie;
+
+  console.log(movieDetails);
 
   return (
     <>
@@ -35,42 +78,81 @@ const Details = () => {
         {selectedMovieInfos.map((props) => (
           <article className="movie-details" key={props.id}>
             <div className="movie-details-top">
-              {/* import poster?? */}
               <img
-                src={`${config.base_url}.${props.poster_path}`}
+                src={`${config.images.base_url}${config.images.backdrop_sizes[3]}${props.backdrop_path}`}
                 alt=""
-                className="poster"
+                className="backdrop"
               />
-              <h1>{props.title}</h1>
+              <p className="movie-details-headline">Movie Details</p>
+              <h2>{props.title}</h2>
               <div className="features">
-                <button>back</button>
-                <button>save</button>
-                <button>download</button>
+                <ButtonIconOnly icon={back} />
+                <div className="save-download-wrapper">
+                  <ButtonIconOnly icon={save} />
+                  <ButtonIconOnly icon={download} />
+                </div>
               </div>
               <div className="key-infos">
-                <p>
-                  <img src={rating} alt="" /> {props.vote_average}
-                </p>
-                <p>{props.release_date}</p>
+                <ul>
+                  <p>
+                    <img src={rating} alt="" /> {props.vote_average}
+                  </p>
+                  <li>{props.release_date}</li>
+                  {genres.genres.map((genre) =>
+                    genre.id === props.genre_ids[0] ? (
+                      <li>{genre.name}</li>
+                    ) : null
+                  )}
+                  <li>props.runtime</li>
+                </ul>
+                {/* <p>{props.release_date}</p>
                 <p>Genre 1</p>
-                <p>props.runtime</p>
+                <p>props.runtime</p> */}
               </div>
             </div>
-            <div className="movie-details-bottom">
-              <h2>Overview</h2>
+            <div className={"movie-details-bottom"}>
+              <h3>Overview</h3>
               <div>
-                <p className="overview-text">{props.overview}</p>
-                <button className="inline-btn">See more</button>
+                <p
+                  className={
+                    openParagraph
+                      ? "overview-text-open"
+                      : "overview-text-closed"
+                  }
+                >
+                  {props.overview}
+                </p>
+                <button
+                  onClick={() => setOpenParagraph(!openParagraph)}
+                  className="inline-btn"
+                >
+                  {openParagraph ? "See less" : "See more"}
+                </button>
               </div>
               <div className="genres">
-                <p>Genre1</p>
-                <p>Genre2</p>
-                <p>Genre3</p>
+                <span>Genres</span>
+                <div className="info-table">
+                  {genres.genres.map((genre) =>
+                    genre.id === props.genre_ids[0] ? <p>{genre.name}</p> : null
+                  )}
+                  {genres.genres.map((genre) =>
+                    genre.id === props.genre_ids[1] ? <p>{genre.name}</p> : null
+                  )}
+                  {genres.genres.map((genre) =>
+                    genre.id === props.genre_ids[2] ? <p>{genre.name}</p> : null
+                  )}
+                  {genres.genres.map((genre) =>
+                    genre.id === props.genre_ids[3] ? <p>{genre.name}</p> : null
+                  )}
+                </div>
               </div>
               <div className="languages">
-                <p>{props.original_language}</p>
-                <p>language2</p>
-                <p>language3</p>
+                <span>Languages</span>
+                <div className="info-table">
+                  <p>{props.original_language}</p>
+                  <p>{props.original_language}</p>
+                  <p>{props.original_language}</p>
+                </div>
               </div>
               <Button icon={play} content="Watch now"></Button>
             </div>
