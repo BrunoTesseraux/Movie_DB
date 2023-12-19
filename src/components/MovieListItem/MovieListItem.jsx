@@ -3,12 +3,15 @@ import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
 
 const MovieListItem = ({ movieId }) => {
-  const { config, movieDetails, setMovieDetails, genreValue } =
+  // Accessing context values
+  const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
 
+  // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
     .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
 
+  // Defining fetch options with authentication headers
   useEffect(() => {
     const options = {
       method: "GET",
@@ -24,25 +27,37 @@ const MovieListItem = ({ movieId }) => {
     )
       .then((response) => response.json())
       .then((movieDetailsObj) => {
+        // Updating movie details in context
         setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
       })
       .catch((error) => console.log(error));
   }, [movieId, setMovieDetails]);
 
+  // Return null if image configuration is not available
   if (!config?.images) {
     return null;
   }
 
-  const movie = movieDetails.find((detail) => detail.id === movieId);
+  let movie = movieDetails.find((detail) => detail.id === movieId);
   if (!movie) {
+    // Display loading message if movie is not found
     return <div>Lade Film...</div>;
   }
 
-  const isGenreMatch = movie.genres?.some((genre) => genre.name === genreValue);
-  if (!isGenreMatch) {
+  // Checking if movie matches search term and selected genre
+  const titleMatchesSearchTerm = searchTerm
+    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    : true;
+  const genreMatches = genreValue
+    ? movie.genres.some((genre) => genre.name === genreValue)
+    : true;
+
+  // Do not render if movie does not match the filter criteria
+  if (!titleMatchesSearchTerm || !genreMatches) {
     return null;
   }
 
+  // Destructuring movie properties
   const {
     title,
     backdrop_path,
@@ -50,9 +65,13 @@ const MovieListItem = ({ movieId }) => {
     runtime,
     vote_average: rating,
   } = movie;
+
+  // Calculating release year from release date
   const releaseYear = release_date
     ? new Date(release_date).getFullYear()
     : "Unknown";
+
+  // Building image URL for movie
   const { secure_base_url, backdrop_sizes } = config.images;
   const imageURL = `${secure_base_url}${backdrop_sizes[0]}${backdrop_path}`;
 

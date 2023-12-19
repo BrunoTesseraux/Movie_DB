@@ -11,7 +11,7 @@ const MovieList = () => {
       <section className="section-movies">
         <ul className="movies-list">
           {allMovies.map((movie) => (
-            <MovieListItem key={movie.id} movieId={movie.id} movie={movie} />
+            <MovieListItem key={movie.id} movieId={movie.id} />
           ))}
         </ul>
       </section>
