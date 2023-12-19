@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
 return (
 <div className="NavBar">
-    <Link to="/home" className={`navLink ${location.pathname === '/home' ? 'active' : ''}`}>
+    <Link to="/" className={`navLink ${location.pathname === '/' ? 'active' : ''}`}>
         <div className="imageContainer">
         <img src="src/components/SVG/Ellipse 7.svg" alt="#" className="ellipseImage navImage" />
-        <img src="src/components/SVG/Home.svg" alt="Home" className={`homeImage navImage ${location.pathname === '/home' ? 'active' : ''}`} />
-        <span className={`imageText ${location.pathname === '/home' ? 'active' : ''}`}>Home</span>
+        <img src="src/components/SVG/Home.svg" alt="Home" className={`homeImage navImage ${location.pathname === '/' ? 'active' : ''}`} />
+        <span className={`imageText ${location.pathname === '/' ? 'active' : ''}`}>Home</span>
         </div>
     </Link>
     <Link to="/Favoriten" className={`navLink ${location.pathname === '/Favoriten' ? 'active' : ''}`}>

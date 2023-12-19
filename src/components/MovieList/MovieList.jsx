@@ -3,6 +3,7 @@ import "./MovieList.scss";
 import { MovieContext } from "../Context/MovieContext";
 import MovieListItem from "../MovieListItem/MovieListItem";
 import Searchbar from "../Searchbar/Searchbar";
+import NavBar from "../NavBar/NavBar";
 const MovieList = () => {
   const { allMovies } = useContext(MovieContext);
   return (
@@ -15,6 +16,7 @@ const MovieList = () => {
           ))}
         </ul>
       </section>
+      <NavBar />
     </>
   );
 };

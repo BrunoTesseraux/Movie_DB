@@ -21,7 +21,7 @@ function App() {
     <>
       <MovieContextProvider>
         <FetchMovies />
-        <Slider />
+        {/* <Slider /> */}
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

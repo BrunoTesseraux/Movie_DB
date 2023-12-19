@@ -1,8 +1,11 @@
 import { useContext, useEffect } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
+import { favoritenDaten } from "../Favoriten/FavoritenDaten";
+
 
 const MovieListItem = ({ movieId }) => {
+
   // Accessing context values
   const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
@@ -75,6 +78,12 @@ const MovieListItem = ({ movieId }) => {
   const { secure_base_url, backdrop_sizes } = config.images;
   const imageURL = `${secure_base_url}${backdrop_sizes[0]}${backdrop_path}`;
 
+
+ const handleAddToFavorites = () => {
+    favoritenDaten.push(movie);
+    console.log("Film zu Favoriten hinzugefügt:", movie);
+  };
+
   return (
     <article key={movieId} className="movie-card">
       <img
@@ -89,6 +98,12 @@ const MovieListItem = ({ movieId }) => {
         {Math.floor(runtime / 60)} h {runtime % 60} Minuten
       </p>
       <p className="movie-card-genre">{genreValue}</p>
+      <img
+        onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
+        className="favorite-icon"
+        src="src\components\SVG\Vector.svg"
+        alt=""
+        />
     </article>
   );
 };
