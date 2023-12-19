@@ -3,7 +3,7 @@ import { MovieContext } from "../Context/MovieContext";
 import "./Slider.scss";
 import rating from "./../../assets/icons/rating.svg";
 
-const Slider = () => {
+const Slider2 = () => {
   const [slideData, setSlideData] = useState([]);
   const { config } = useContext(MovieContext);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,7 +20,7 @@ const Slider = () => {
   useEffect(() => {
     const trendingMovies = () => {
       fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1`,
         options
       )
         .then((response) => response.json())
@@ -35,7 +35,7 @@ const Slider = () => {
     trendingMovies();
   }, []);
 
-  console.log(slideData);
+  //   console.log(slideData);
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -52,7 +52,7 @@ const Slider = () => {
   return (
     <>
       <div className="heading-slider">
-        <h1>Trending Movies</h1>
+        <h1>Upcoming Movies</h1>
         <a href="">See all</a>
       </div>
       <div className="slider-container">
@@ -96,4 +96,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default Slider2;

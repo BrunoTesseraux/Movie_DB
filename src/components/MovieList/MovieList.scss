@@ -1,3 +1,13 @@
-.section-movies{
-    margin-bottom: 5rem;
+
+
+.section-movies {
+  margin-block: 4rem;
+     margin-bottom: 5rem;
 }
+
+.movies-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+

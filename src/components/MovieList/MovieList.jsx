@@ -8,8 +8,7 @@ const MovieList = () => {
   const { allMovies } = useContext(MovieContext);
   return (
     <>
-      <Searchbar />
-      <section className="section-movies">
+      <section className="section-movies container">
         <ul className="movies-list">
           {allMovies.map((movie) => (
             <MovieListItem key={movie.id} movieId={movie.id} />

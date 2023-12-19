@@ -12,3 +12,14 @@
     width: 20px;
   }
 }
+
+.secondary-btn-icon-only {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: #fff;
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: none;
+}
