@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
+import { Link } from "react-router-dom";
 
 const MovieListItem = ({ movieId }) => {
   // Accessing context values
@@ -60,7 +61,7 @@ const MovieListItem = ({ movieId }) => {
   // Destructuring movie properties
   const {
     title,
-    backdrop_path,
+    poster_path,
     release_date,
     runtime,
     vote_average: rating,
@@ -72,24 +73,38 @@ const MovieListItem = ({ movieId }) => {
     : "Unknown";
 
   // Building image URL for movie
-  const { secure_base_url, backdrop_sizes } = config.images;
-  const imageURL = `${secure_base_url}${backdrop_sizes[0]}${backdrop_path}`;
-
+  const { secure_base_url, poster_sizes } = config.images;
+  // console.log(config);
+  // console.log(backdrop_path);
+  const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
+  console.log(movie);
   return (
-    <article key={movieId} className="movie-card">
-      <img
-        className="movie-card-img"
-        src={imageURL}
-        alt={`Bild des Films ${title}`}
-      />
-      <h2 className="movie-card-headline">{title}</h2>
-      <p className="movie-card-release_date">{releaseYear}</p>
-      <p className="movie-card-rating">{rating}</p>
-      <p className="movie-card-genre">
-        {Math.floor(runtime / 60)} h {runtime % 60} Minuten
-      </p>
-      <p className="movie-card-genre">{genreValue}</p>
-    </article>
+    <Link to={`/detail/${movie.id}`} className="link">
+      <li key={movieId} className="movie-card">
+        <img
+          className="movie-card-img"
+          src={imageURL}
+          alt={`Bild des Films ${title}`}
+        />
+        <div className="movie-card-content">
+          <h2 className="movie-card-headline">{title}</h2>
+          <p className="movie-card-release_date">{releaseYear}</p>
+          <p className="movie-card-rating">
+            {rating}
+            <img src="../../assets/icons/rating.svg" alt="" />
+          </p>
+          <p className="movie-card-genre">
+            {Math.floor(runtime / 60)} h {runtime % 60} Minuten
+          </p>
+          <p className="movie-card-genre">{genreValue}</p>
+        </div>
+        <img
+          src="/src/components/SVG/Vector.svg"
+          alt=""
+          className="favorites"
+        />
+      </li>
+    </Link>
   );
 };
 
