@@ -1,9 +1,13 @@
 import { useContext, useEffect } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
+
+import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
 
+
 const MovieListItem = ({ movieId }) => {
+
   // Accessing context values
   const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
@@ -73,11 +77,15 @@ const MovieListItem = ({ movieId }) => {
     : "Unknown";
 
   // Building image URL for movie
+
   const { secure_base_url, poster_sizes } = config.images;
-  // console.log(config);
-  // console.log(backdrop_path);
   const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
-  console.log(movie);
+
+ const handleAddToFavorites = () => {
+    favoritenDaten.push(movie);
+    console.log("Film zu Favoriten hinzugefügt:", movie);
+  };
+
   return (
     <Link to={`/detail/${movie.id}`} className="link">
       <li key={movieId} className="movie-card">
@@ -98,10 +106,11 @@ const MovieListItem = ({ movieId }) => {
           </p>
           <p className="movie-card-genre">{genreValue}</p>
         </div>
-        <img
-          src="/src/components/SVG/Vector.svg"
-          alt=""
-          className="favorites"
+       <img
+        onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
+        className="favorite-icon"
+        src="src\components\SVG\Vector.svg"
+        alt=""
         />
       </li>
     </Link>
