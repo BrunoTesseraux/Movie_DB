@@ -4,6 +4,8 @@
   .movie-card {
     list-style: none;
     display: flex;
+
+    row-gap: 2rem;
     column-gap: 1.25rem;
     position: relative;
 
@@ -17,17 +19,22 @@
     }
     .movie-card-content {
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
       .movie-card-headline {
         text-decoration: none;
         font-size: 1.125rem;
         color: #000;
+        max-width: 80%;
       }
 
       .movie-card-infos {
         display: flex;
         align-items: center;
         font-size: 16px;
-        justify-content: space-between;
+        justify-content: flex-start;
 
         .movie-card-release_date {
           color: #000;
@@ -36,7 +43,8 @@
         }
 
         .rating-icon {
-          width: 16px;
+          width: 12px;
+          margin-right: 4px;
         }
 
         .movie-card-rating {
@@ -58,6 +66,8 @@
 
         .dot {
           font-size: 8px;
+          margin-inline: 3%;
+          color: #000;
         }
       }
     }
