@@ -25,7 +25,7 @@
   box-sizing: border-box;
 }
 
-.container {
+.main-container {
   max-width: 1440px;
   margin: 0 auto;
   margin-inline: 5%;

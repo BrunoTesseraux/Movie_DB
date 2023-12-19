@@ -1,13 +1,11 @@
 import { useContext, useEffect } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
-
+import rating from "./../../assets/icons/rating.svg";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
 
-
 const MovieListItem = ({ movieId }) => {
-
   // Accessing context values
   const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
@@ -63,13 +61,7 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Destructuring movie properties
-  const {
-    title,
-    poster_path,
-    release_date,
-    runtime,
-    vote_average: rating,
-  } = movie;
+  const { title, poster_path, release_date, runtime, vote_average } = movie;
 
   // Calculating release year from release date
   const releaseYear = release_date
@@ -81,7 +73,7 @@ const MovieListItem = ({ movieId }) => {
   const { secure_base_url, poster_sizes } = config.images;
   const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
 
- const handleAddToFavorites = () => {
+  const handleAddToFavorites = () => {
     favoritenDaten.push(movie);
     console.log("Film zu Favoriten hinzugefügt:", movie);
   };
@@ -89,28 +81,41 @@ const MovieListItem = ({ movieId }) => {
   return (
     <Link to={`/detail/${movie.id}`} className="link">
       <li key={movieId} className="movie-card">
-        <img
-          className="movie-card-img"
-          src={imageURL}
-          alt={`Bild des Films ${title}`}
-        />
+        <div className="image-wrapper">
+          <img
+            className="movie-card-img"
+            src={imageURL}
+            alt={`Bild des Films ${title}`}
+          />
+        </div>
         <div className="movie-card-content">
           <h2 className="movie-card-headline">{title}</h2>
-          <p className="movie-card-release_date">{releaseYear}</p>
-          <p className="movie-card-rating">
-            {rating}
-            <img src="../../assets/icons/rating.svg" alt="" />
-          </p>
-          <p className="movie-card-genre">
-            {Math.floor(runtime / 60)} h {runtime % 60} Minuten
-          </p>
-          <p className="movie-card-genre">{genreValue}</p>
+          <div className="movie-card-infos">
+            <p className="movie-card-rating">
+              <img src={rating} alt="" className="rating-icon" />
+              {vote_average.toFixed(1)}
+            </p>
+            <p className="dot">⏺</p>
+            <p className="movie-card-release_date">{releaseYear}</p>
+            <p className="dot">⏺</p>
+
+            {genreValue && (
+              <>
+                <p className="movie-card-genre">{genreValue}</p>
+                <p className="dot">⏺</p>
+              </>
+            )}
+
+            <p className="movie-card-runtime">
+              {Math.floor(runtime / 60)}h {runtime % 60}m
+            </p>
+          </div>
         </div>
-       <img
-        onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
-        className="favorite-icon"
-        src="src\components\SVG\Vector.svg"
-        alt=""
+        <img
+          onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
+          className="favorites"
+          src="src\components\SVG\Vector.svg"
+          alt=""
         />
       </li>
     </Link>

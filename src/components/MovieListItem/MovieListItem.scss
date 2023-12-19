@@ -4,35 +4,66 @@
   .movie-card {
     list-style: none;
     display: flex;
-    column-gap: gap;
+    column-gap: 1.25rem;
     position: relative;
 
-    .movie-card-img {
+    .image-wrapper {
       width: 20%;
-      object-fit: cover;
-      border-radius: 0.5rem;
+      .movie-card-img {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 0.8rem;
+      }
     }
-
     .movie-card-content {
+      width: 100%;
       .movie-card-headline {
         text-decoration: none;
         font-size: 1.125rem;
+        color: #000;
       }
 
-      .movie-card-release_date {
-      }
+      .movie-card-infos {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        justify-content: space-between;
 
-      .movie-card-rating {
-      }
+        .movie-card-release_date {
+          color: #000;
+          line-height: 24px;
+          display: flex;
+        }
 
-      .movie-card-genre {
-      }
+        .rating-icon {
+          width: 16px;
+        }
 
-      .movie-card-genre {
+        .movie-card-rating {
+          color: #000;
+          line-height: 24px;
+        }
+
+        .movie-card-runtime {
+          line-height: 24px;
+          color: #000;
+        }
+
+        .movie-card-genre {
+          color: #000;
+        }
+
+        .movie-card-genre::after {
+        }
+
+        .dot {
+          font-size: 8px;
+        }
       }
     }
     .favorites {
       position: absolute;
+      display: flex;
       top: 0;
       right: 0;
     }
