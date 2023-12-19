@@ -1,0 +1,9 @@
+.section-movies {
+  margin-block: 4rem;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
