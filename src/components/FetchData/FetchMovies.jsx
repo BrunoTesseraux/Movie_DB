@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 const FetchMovies = () => {
-  const { allMovies, setAllMovies, config, setConfig, genres, setGenres } =
+  const { setAllMovies, setConfig, setGenres, setMovieDetails, movieId } =
     useContext(MovieContext);
 
   const options = {
@@ -26,14 +26,14 @@ const FetchMovies = () => {
         .then((moviesData) => {
           newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
           // get 5 pages from the api -> One Page have 20 Objects in an Array
-          if (pageIndex === 400) {
+          if (pageIndex === 10) {
             setAllMovies(newMovies); // set the state on the end of the bottom for loop
           }
         })
         .catch((error) => console.log(error));
     };
 
-    for (let i = 1; i <= 400; i++) {
+    for (let i = 1; i <= 10; i++) {
       fetchMovies(i);
     }
   }, []);
@@ -42,7 +42,8 @@ const FetchMovies = () => {
     const fetchConfig = () => {
       fetch("https://api.themoviedb.org/3/configuration", options)
         .then((response) => response.json())
-        .then((configData) => setConfig(configData));
+        .then((configData) => setConfig(configData))
+        .catch((error) => console.log(error));
     };
     fetchConfig();
   }, []);
@@ -51,17 +52,11 @@ const FetchMovies = () => {
     const fetchGenre = () => {
       fetch("https://api.themoviedb.org/3/genre/movie/list", options)
         .then((response) => response.json())
-        .then((genreData) => setGenres(genreData));
+        .then((genreData) => setGenres(genreData))
+        .catch((error) => console.log(error));
     };
     fetchGenre();
   }, []);
-
-  if (allMovies !== undefined) {
-    console.log(allMovies);
-  }
-
-  console.log(config);
-  console.log(genres);
 
   return <div></div>;
 };
