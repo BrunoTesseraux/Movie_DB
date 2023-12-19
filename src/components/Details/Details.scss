@@ -1,0 +1,52 @@
+.movie-details-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vw;
+  font-size: 1.75rem;
+  .poster {
+    height: 50vw;
+  }
+  .key-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+.movie-details-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 5vw;
+  .overview-text {
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+  }
+
+  .inline-btn {
+    border: none;
+    background-color: #fff;
+    display: inline;
+    color: #fc2121;
+  }
+  .genres {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .languages {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
