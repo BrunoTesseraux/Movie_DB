@@ -1,0 +1,40 @@
+.link {
+  text-decoration: none;
+
+  .movie-card {
+    list-style: none;
+    display: flex;
+    column-gap: gap;
+    position: relative;
+
+    .movie-card-img {
+      width: 20%;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+
+    .movie-card-content {
+      .movie-card-headline {
+        text-decoration: none;
+        font-size: 1.125rem;
+      }
+
+      .movie-card-release_date {
+      }
+
+      .movie-card-rating {
+      }
+
+      .movie-card-genre {
+      }
+
+      .movie-card-genre {
+      }
+    }
+    .favorites {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
