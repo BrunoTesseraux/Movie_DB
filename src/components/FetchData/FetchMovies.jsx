@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MovieContext } from "../Context/MovieContext";
 
 const FetchMovies = () => {
-  const [allMovies, setAllMovies] = useState([]);
-  const [config, setConfig] = useState([]);
-  const [genres, setGenres] = useState([]);
-  // const pageIndex = 1;
+  const { allMovies, setAllMovies, config, setConfig, genres, setGenres } =
+    useContext(MovieContext);
 
   const options = {
     method: "GET",
