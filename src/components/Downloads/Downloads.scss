@@ -1,26 +1,22 @@
+.download-container {
+  margin-bottom: 80px;
 
-
-.container{
-    margin-bottom: 80px;
-    
-}
-
-h2 {
+  h2 {
     text-align: center;
     padding: 40px;
-    color: #FC2121;
-}
+    color: #fc2121;
+  }
 
-.downloaded-movies-list{
+  .downloaded-movies-list {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center; /* Horizontale Ausrichtung in der Mitte */
     align-items: center; /* Vertikale Ausrichtung in der Mitte */
-}
+  }
 
-.downloaded-movie-item{
-    background-color: #97AABD;
+  .downloaded-movie-item {
+    background-color: #97aabd;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -28,13 +24,14 @@ h2 {
     flex-direction: column; /* Setze den flex direction auf column */
 
     img {
-        width: 120px;
-        border-radius: 5px;
-        margin-bottom: 10px; /* Abstand zwischen Bild und Button hinzufügen */
+      width: 120px;
+      border-radius: 5px;
+      margin-bottom: 10px; /* Abstand zwischen Bild und Button hinzufügen */
     }
 
     .Button {
-        padding: 3px;
-        align-self: center; /* Zentriere den Button horizontal */
+      padding: 3px;
+      align-self: center; /* Zentriere den Button horizontal */
     }
+  }
 }
