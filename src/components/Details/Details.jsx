@@ -98,9 +98,9 @@ const Details = () => {
                     <img src={rating} alt="" /> {props.vote_average}
                   </p>
                   <li>{props.release_date}</li>
-                  {genres.genres.map((genre) =>
+                  {genres.genres.map((genre, index) =>
                     genre.id === props.genre_ids[0] ? (
-                      <li>{genre.name}</li>
+                      <li key={index}>{genre.name}</li>
                     ) : null
                   )}
                   <li>props.runtime</li>
@@ -132,17 +132,17 @@ const Details = () => {
               <div className="genres">
                 <span>Genres</span>
                 <div className="info-table">
-                  {genres.genres.map((genre) =>
-                    genre.id === props.genre_ids[0] ? <p>{genre.name}</p> : null
+                  {genres.genres.map((genre, index) =>
+                    genre.id === props.genre_ids[0] ? <p key={index}>{genre.name}</p> : null
                   )}
-                  {genres.genres.map((genre) =>
-                    genre.id === props.genre_ids[1] ? <p>{genre.name}</p> : null
+                  {genres.genres.map((genre, index) =>
+                    genre.id === props.genre_ids[1] ? <p key={index}>{genre.name}</p> : null
                   )}
-                  {genres.genres.map((genre) =>
-                    genre.id === props.genre_ids[2] ? <p>{genre.name}</p> : null
+                  {genres.genres.map((genre, index) =>
+                    genre.id === props.genre_ids[2] ? <p key={index}>{genre.name}</p> : null
                   )}
-                  {genres.genres.map((genre) =>
-                    genre.id === props.genre_ids[3] ? <p>{genre.name}</p> : null
+                  {genres.genres.map((genre, index) =>
+                    genre.id === props.genre_ids[3] ? <p key={index}>{genre.name}</p> : null
                   )}
                 </div>
               </div>
