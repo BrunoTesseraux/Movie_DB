@@ -5,13 +5,11 @@ import { MovieContext } from "../Context/MovieContext";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
 
-
 const MovieListItem = ({ movieId }) => {
-
   // Accessing context values
   const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
-
+  console.log(movieDetails);
   // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
     .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
@@ -81,7 +79,7 @@ const MovieListItem = ({ movieId }) => {
   const { secure_base_url, poster_sizes } = config.images;
   const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
 
- const handleAddToFavorites = () => {
+  const handleAddToFavorites = () => {
     favoritenDaten.push(movie);
     console.log("Film zu Favoriten hinzugefügt:", movie);
   };
@@ -106,11 +104,11 @@ const MovieListItem = ({ movieId }) => {
           </p>
           <p className="movie-card-genre">{genreValue}</p>
         </div>
-       <img
-        onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
-        className="favorite-icon"
-        src="src\components\SVG\Vector.svg"
-        alt=""
+        <img
+          onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
+          className="favorite-icon"
+          src="src\components\SVG\Vector.svg"
+          alt=""
         />
       </li>
     </Link>
