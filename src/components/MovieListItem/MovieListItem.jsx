@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
 import rating from "./../../assets/icons/rating.svg";
@@ -7,8 +7,15 @@ import { Link } from "react-router-dom";
 
 const MovieListItem = ({ movieId }) => {
   // Accessing context values
-  const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
-    useContext(MovieContext);
+  const {
+    config,
+    movieDetails,
+    setMovieDetails,
+    genreValue,
+    searchTerm,
+    innerWidth,
+    setInnerWidth,
+  } = useContext(MovieContext);
 
   // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
@@ -34,7 +41,20 @@ const MovieListItem = ({ movieId }) => {
         setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
       })
       .catch((error) => console.log(error));
+
+    // Funktion, die bei einer Größenänderung des Fensters aufgerufen wird
+    const handleResize = () => {
+      setInnerWidth(window.outerWidth);
+    };
+
+    // Event-Listener hinzufügen
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup-Funktion
+    return () => window.removeEventListener("resize", handleResize);
   }, [movieId, setMovieDetails]);
+
+  console.log(outerWidth);
 
   // Return null if image configuration is not available
   if (!config?.images) {
@@ -61,7 +81,14 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Destructuring movie properties
-  const { title, poster_path, release_date, runtime, vote_average } = movie;
+  const {
+    title,
+    poster_path,
+    backdrop_path,
+    release_date,
+    runtime,
+    vote_average,
+  } = movie;
 
   // Calculating release year from release date
   const releaseYear = release_date
@@ -70,21 +97,26 @@ const MovieListItem = ({ movieId }) => {
 
   // Building image URL for movie
 
-  const { secure_base_url, poster_sizes } = config.images;
-  const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
+  const { secure_base_url, poster_sizes, backdrop_sizes } = config.images;
+  const imageURLPoster = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
+  const imageURLBackdrop = `${secure_base_url}${backdrop_sizes[3]}${backdrop_path}`;
 
   const handleAddToFavorites = () => {
     favoritenDaten.push(movie);
     console.log("Film zu Favoriten hinzugefügt:", movie);
   };
 
+  // console.log(window);
+
   return (
     <Link to={`/detail/${movie.id}`} className="link">
       <li key={movieId} className="movie-card">
         <div className="image-wrapper">
           <img
-            className="movie-card-img"
-            src={imageURL}
+            className={
+              innerWidth <= 992 ? "movie-card-img" : "movie-card-desktop-img"
+            }
+            src={innerWidth <= 992 ? imageURLPoster : imageURLBackdrop}
             alt={`Bild des Films ${title}`}
           />
         </div>
