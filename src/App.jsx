@@ -14,6 +14,7 @@ import Profile from "./components/Profile/Profile";
 import Favoriten from "./components/Favoriten/Favoriten";
 import Downloads from "./components/Downloads/Downloads";
 import Slider from "./components/Slider/Slider";
+import Trailer from "./components/Trailer/Trailer";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/movies" element={<MovieList />} />
+          <Route path="/trailer/:id" element={<Trailer />} />
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>

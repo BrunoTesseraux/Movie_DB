@@ -11,7 +11,7 @@ const Home = () => {
       <div>Welcome!</div>
       <Searchbar />
       <Slider />
-      {/* <Slider2 /> */}
+      <Slider2 />
 
       <NavBar />
     </>
