@@ -2,9 +2,8 @@ import "./NavBar.scss";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-
   return (
-    <div className="NavBar">
+    <div className="NavBar ">
       <Link
         to="/"
         className={`navLink ${location.pathname === "/" ? "active" : ""}`}

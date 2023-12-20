@@ -1,5 +1,4 @@
 import "./Button.scss";
-import back from "./../../assets/icons/back.svg";
 
 const ButtonIconOnly = (props) => {
   return (

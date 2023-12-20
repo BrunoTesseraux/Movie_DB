@@ -14,6 +14,7 @@ import Profile from "./components/Profile/Profile";
 import Favoriten from "./components/Favoriten/Favoriten";
 import Downloads from "./components/Downloads/Downloads";
 import { useState } from "react";
+import Trailer from "./components/Trailer/Trailer";
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/movies" element={<MovieList />} />
+          <Route path="/trailer/:id" element={<Trailer />} />
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>

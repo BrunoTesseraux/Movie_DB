@@ -9,6 +9,7 @@ const MovieContextProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [genreValue, setGenreValue] = useState("");
   const [movieDetails, setMovieDetails] = useState([]);
+  const [innerWidth, setInnerWidth] = useState(window.outerWidth);
 
   return (
     <MovieContext.Provider
@@ -25,6 +26,8 @@ const MovieContextProvider = ({ children }) => {
         setGenreValue,
         movieDetails,
         setMovieDetails,
+        innerWidth,
+        setInnerWidth,
       }}
     >
       {children}
