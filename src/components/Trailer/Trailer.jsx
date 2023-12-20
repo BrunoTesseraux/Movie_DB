@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import ButtonBack from "../Button/ButtonBack";
 import "./Trailer.scss";
+
 import back from "./../../assets/icons/back.svg";
 
 const Trailer = () => {
