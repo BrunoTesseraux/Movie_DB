@@ -1,56 +1,52 @@
-
-
 .NavBar {
-    background-color: rgba(255, 255, 255, 0.857);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px ;
+  background-color: rgba(255, 255, 255, 0.857);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
 }
 
 .navImage {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 
-    transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .navLink {
+  font-size: 14px;
+  &.active .navImage {
+    filter: invert(33%) sepia(90%) saturate(7499%) hue-rotate(346deg)
+      brightness(101%) contrast(94%);
+  }
+
+  .imageText {
     font-size: 14px;
-    &.active .navImage {
-    filter: invert(33%) sepia(90%) saturate(7499%) hue-rotate(346deg) brightness(101%) contrast(94%);
-    
-    }
+  }
 
-    .imageText {
-    font-size: 14px;
-    }
+  .ellipseImage {
+    position: absolute;
+    left: 35px;
+  }
 
-    .ellipseImage{
-        position: absolute;
-        left: 35px;
-    }
+  .imageText {
+    position: absolute;
+    top: 27px;
+    padding-left: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #97aabd;
+  }
+  .imageText.active {
+    color: #fc2121;
+  }
 
-        .imageText{
-            position: absolute;
-            top: 27px;
-            padding-left: 5px;
-            font-weight: bold;
-            text-decoration: none; 
-            color: #97AABD;
-            
-        }
-        .imageText.active {
-
-            color: #FC2121;
-        }
-
-        .navImage.active {
-            filter: invert(33%) sepia(90%) saturate(7499%) hue-rotate(346deg) brightness(101%) contrast(94%);
-        }
+  .navImage.active {
+    filter: invert(33%) sepia(90%) saturate(7499%) hue-rotate(346deg)
+      brightness(101%) contrast(94%);
+  }
 }
-
