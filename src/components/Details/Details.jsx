@@ -105,6 +105,12 @@ const Details = () => {
                     <img src={rating} alt="" /> {props.vote_average}
                   </p>
                   <li>{props.release_date}</li>
+                  {genres.genres.map((genre, index) =>
+                    genre.id === props.genre_ids[0] ? (
+                      <li key={index}>{genre.name}</li>
+                    ) : null
+                  )}
+                  <li>props.runtime</li>
                   <li>{props.genres[0].name}</li>
                   <li>
                     {Math.floor(props.runtime / 60)} h {props.runtime % 60} min

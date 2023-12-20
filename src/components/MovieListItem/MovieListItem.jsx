@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
+import { downloadDaten } from "../Downloads/DownloadsDaten";
 import rating from "./../../assets/icons/rating.svg";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
@@ -21,7 +22,16 @@ const MovieListItem = ({ movieId }) => {
   const bearerToken = import.meta.env
     .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
 
-  // Defining fetch options with authentication headers
+  // State to track if the movie is already in favorites
+  const [isInFavorites, setIsInFavorites] = useState(
+    favoritenDaten.some((favMovie) => favMovie.id === movieId)
+  );
+  const [isInDownloads, setIsInDownloads] = useState(
+    downloadDaten.some((dowmMovie) => dowmMovie.id === movieId)
+  );
+
+
+  // Fetch movie details and add to context
   useEffect(() => {
     const options = {
       method: "GET",
@@ -37,8 +47,11 @@ const MovieListItem = ({ movieId }) => {
     )
       .then((response) => response.json())
       .then((movieDetailsObj) => {
-        // Updating movie details in context
-        setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        // Check if the movie is already in movieDetails
+        const movieExists = movieDetails.some((detail) => detail.id === movieId);
+        if (!movieExists) {
+          setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        }
       })
       .catch((error) => console.log(error));
 
@@ -90,20 +103,34 @@ const MovieListItem = ({ movieId }) => {
     vote_average,
   } = movie;
 
-  // Calculating release year from release date
+ 
   const releaseYear = release_date
     ? new Date(release_date).getFullYear()
     : "Unknown";
 
-  // Building image URL for movie
 
   const { secure_base_url, poster_sizes, backdrop_sizes } = config.images;
   const imageURLPoster = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
   const imageURLBackdrop = `${secure_base_url}${backdrop_sizes[3]}${backdrop_path}`;
 
   const handleAddToFavorites = () => {
-    favoritenDaten.push(movie);
-    console.log("Film zu Favoriten hinzugefügt:", movie);
+    if (isInFavorites) {
+      alert("Dieser Film befindet sich bereits in Ihren Favoriten.");
+    } else {
+      favoritenDaten.push(movie);
+      setIsInFavorites(true);
+      console.log("Film zu Favoriten hinzugefügt:", movie);
+    }
+  };
+
+  const handleAddToDownloads = () => {
+    if (isInDownloads) {
+      alert("Dieser Film befindet sich bereits in Ihren Downloads.");
+    } else {
+      downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
+      setIsInDownloads(true);
+      console.log("Film zu Downloads hinzugefügt:", movie);
+    }
   };
 
   // console.log(window);
@@ -144,11 +171,19 @@ const MovieListItem = ({ movieId }) => {
           </div>
         </div>
         <img
+
           onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
           className="favorites"
+
           src="src\components\SVG\Vector.svg"
           alt=""
         />
+        <img
+          onClick={handleAddToDownloads}
+          className="download-icon"
+          src="src\components\SVG\Download.svg"
+          alt=""
+        />  
       </li>
     </Link>
   );

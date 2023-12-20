@@ -23,7 +23,7 @@ const NavBar = () => {
           />
           <span
             className={`imageText ${
-              location.pathname === "/home" ? "active" : ""
+              location.pathname === "/" ? "active" : ""
             }`}
           >
             Home
