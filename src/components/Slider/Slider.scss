@@ -1,7 +1,4 @@
-
-
 .slider {
-
   position: relative;
   width: 90%;
   overflow: hidden;
@@ -100,7 +97,7 @@
   }
 }
 .rating_star img {
-  display: inline;
+  display: inlsine;
   max-width: 1rem;
   overflow: initial;
 }
@@ -115,4 +112,10 @@
     font-size: 18px;
     color: tomato;
   }
+}
+.sliderlink {
+  display: none;
+}
+.active-link {
+  display: initial;
 }
