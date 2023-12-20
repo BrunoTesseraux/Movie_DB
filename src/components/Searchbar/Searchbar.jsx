@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import "./Searchbar.scss";
+import searchIcon from "../../assets/icons/search-icon.svg";
 const Searchbar = () => {
   const { genres, genreValue, setGenreValue, searchTerm, setSearchTerm } =
     useContext(MovieContext);
@@ -11,20 +12,28 @@ const Searchbar = () => {
   console.log();
   return (
     <>
-      <section className="section-search-bar">
-        <input
-          type="search"
-          name="search"
-          id="search"
-          placeholder="Search Movie..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <div>
+      <section className="section-search-bar main-container">
+        <div className="search-wrapper ">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            className="search"
+            placeholder="Search Movie..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <img src={searchIcon} alt="search-icon" className="search-icon" />
+        </div>
+        <div className="genres-wrapper">
           {genres?.genres?.map((genre, index) =>
             genre.name.toLowerCase() !== "documentary" ? (
               <button
-                className=""
+                className={`genres ${
+                  genreValue.toLowerCase() === genre.name.toLowerCase()
+                    ? "active"
+                    : null
+                }`}
                 key={index}
                 onClick={(e) => setGenreValue(e.target.textContent)}
               >

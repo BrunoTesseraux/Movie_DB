@@ -1,20 +1,37 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
-
+import { downloadDaten } from "../Downloads/DownloadsDaten";
+import rating from "./../../assets/icons/rating.svg";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
 
 const MovieListItem = ({ movieId }) => {
   // Accessing context values
-  const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
-    useContext(MovieContext);
-  console.log(movieDetails);
+  const {
+    config,
+    movieDetails,
+    setMovieDetails,
+    genreValue,
+    searchTerm,
+    innerWidth,
+    setInnerWidth,
+  } = useContext(MovieContext);
+
   // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
     .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
 
-  // Defining fetch options with authentication headers
+  // State to track if the movie is already in favorites
+  const [isInFavorites, setIsInFavorites] = useState(
+    favoritenDaten.some((favMovie) => favMovie.id === movieId)
+  );
+  const [isInDownloads, setIsInDownloads] = useState(
+    downloadDaten.some((dowmMovie) => dowmMovie.id === movieId)
+  );
+
+
+  // Fetch movie details and add to context
   useEffect(() => {
     const options = {
       method: "GET",
@@ -30,11 +47,27 @@ const MovieListItem = ({ movieId }) => {
     )
       .then((response) => response.json())
       .then((movieDetailsObj) => {
-        // Updating movie details in context
-        setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        // Check if the movie is already in movieDetails
+        const movieExists = movieDetails.some((detail) => detail.id === movieId);
+        if (!movieExists) {
+          setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        }
       })
       .catch((error) => console.log(error));
+
+    // Funktion, die bei einer Größenänderung des Fensters aufgerufen wird
+    const handleResize = () => {
+      setInnerWidth(window.outerWidth);
+    };
+
+    // Event-Listener hinzufügen
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup-Funktion
+    return () => window.removeEventListener("resize", handleResize);
   }, [movieId, setMovieDetails]);
+
+  console.log(outerWidth);
 
   // Return null if image configuration is not available
   if (!config?.images) {
@@ -64,52 +97,93 @@ const MovieListItem = ({ movieId }) => {
   const {
     title,
     poster_path,
+    backdrop_path,
     release_date,
     runtime,
-    vote_average: rating,
+    vote_average,
   } = movie;
 
-  // Calculating release year from release date
+ 
   const releaseYear = release_date
     ? new Date(release_date).getFullYear()
     : "Unknown";
 
-  // Building image URL for movie
 
-  const { secure_base_url, poster_sizes } = config.images;
-  const imageURL = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
+  const { secure_base_url, poster_sizes, backdrop_sizes } = config.images;
+  const imageURLPoster = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
+  const imageURLBackdrop = `${secure_base_url}${backdrop_sizes[3]}${backdrop_path}`;
 
   const handleAddToFavorites = () => {
-    favoritenDaten.push(movie);
-    console.log("Film zu Favoriten hinzugefügt:", movie);
+    if (isInFavorites) {
+      alert("Dieser Film befindet sich bereits in Ihren Favoriten.");
+    } else {
+      favoritenDaten.push(movie);
+      setIsInFavorites(true);
+      console.log("Film zu Favoriten hinzugefügt:", movie);
+    }
   };
+
+  const handleAddToDownloads = () => {
+    if (isInDownloads) {
+      alert("Dieser Film befindet sich bereits in Ihren Downloads.");
+    } else {
+      downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
+      setIsInDownloads(true);
+      console.log("Film zu Downloads hinzugefügt:", movie);
+    }
+  };
+
+  // console.log(window);
 
   return (
     <Link to={`/detail/${movie.id}`} className="link">
       <li key={movieId} className="movie-card">
-        <img
-          className="movie-card-img"
-          src={imageURL}
-          alt={`Bild des Films ${title}`}
-        />
+        <div className="image-wrapper">
+          <img
+            className={
+              innerWidth <= 992 ? "movie-card-img" : "movie-card-desktop-img"
+            }
+            src={innerWidth <= 992 ? imageURLPoster : imageURLBackdrop}
+            alt={`Bild des Films ${title}`}
+          />
+        </div>
         <div className="movie-card-content">
           <h2 className="movie-card-headline">{title}</h2>
-          <p className="movie-card-release_date">{releaseYear}</p>
-          <p className="movie-card-rating">
-            {rating}
-            <img src="../../assets/icons/rating.svg" alt="" />
-          </p>
-          <p className="movie-card-genre">
-            {Math.floor(runtime / 60)} h {runtime % 60} Minuten
-          </p>
-          <p className="movie-card-genre">{genreValue}</p>
+          <div className="movie-card-infos">
+            <p className="movie-card-rating">
+              <img src={rating} alt="" className="rating-icon" />
+              {vote_average.toFixed(1)}
+            </p>
+            <p className="dot">⏺</p>
+            <p className="movie-card-release_date">{releaseYear}</p>
+            <p className="dot">⏺</p>
+
+            {genreValue && (
+              <>
+                <p className="movie-card-genre">{genreValue}</p>
+                <p className="dot">⏺</p>
+              </>
+            )}
+
+            <p className="movie-card-runtime">
+              {Math.floor(runtime / 60)}h {runtime % 60}m
+            </p>
+          </div>
         </div>
         <img
+
           onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
-          className="favorite-icon"
+          className="favorites"
+
           src="src\components\SVG\Vector.svg"
           alt=""
         />
+        <img
+          onClick={handleAddToDownloads}
+          className="download-icon"
+          src="src\components\SVG\Download.svg"
+          alt=""
+        />  
       </li>
     </Link>
   );

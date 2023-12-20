@@ -11,8 +11,8 @@ const upcomingURL =
 import "./Home.scss";
 const Home = (onAllResultsChange) => {
   return (
-    <>
-      <div>Welcome!</div>
+    <main>
+      <div cla>Welcome!</div>
       <Searchbar />
       <div className="heading-slider">
         <h1>Trending Movies</h1>
@@ -28,7 +28,7 @@ const Home = (onAllResultsChange) => {
       </div>
       <SliderComponent fetchUrl={upcomingURL} />
       <NavBar />
-    </>
+    </main>
   );
 };
 
