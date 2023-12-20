@@ -10,6 +10,8 @@ const MovieContextProvider = ({ children }) => {
   const [genreValue, setGenreValue] = useState("");
   const [movieDetails, setMovieDetails] = useState([]);
   const [innerWidth, setInnerWidth] = useState(window.outerWidth);
+  const [showSplash, setShowSplash] = useState(false);
+  const [displaySplash, setDisplaySplash] = useState(true);
 
   return (
     <MovieContext.Provider
@@ -28,6 +30,10 @@ const MovieContextProvider = ({ children }) => {
         setMovieDetails,
         innerWidth,
         setInnerWidth,
+        showSplash,
+        setShowSplash,
+        displaySplash,
+        setDisplaySplash,
       }}
     >
       {children}
