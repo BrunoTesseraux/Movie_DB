@@ -13,9 +13,14 @@ import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/Profile/Profile";
 import Favoriten from "./components/Favoriten/Favoriten";
 import Downloads from "./components/Downloads/Downloads";
-import Slider from "./components/Slider/Slider";
+import { useState } from "react";
 
 function App() {
+  const [trendingMovies, setTrendingMovies] = useState([]);
+
+  const handleAllResultsChange = (trending) => {
+    setTrendingMovies(trending);
+  };
   return (
     <>
       <MovieContextProvider>
