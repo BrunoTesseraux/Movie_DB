@@ -30,7 +30,6 @@ const MovieListItem = ({ movieId }) => {
     downloadDaten.some((dowmMovie) => dowmMovie.id === movieId)
   );
 
-
   // Fetch movie details and add to context
   useEffect(() => {
     const options = {
@@ -48,7 +47,9 @@ const MovieListItem = ({ movieId }) => {
       .then((response) => response.json())
       .then((movieDetailsObj) => {
         // Check if the movie is already in movieDetails
-        const movieExists = movieDetails.some((detail) => detail.id === movieId);
+        const movieExists = movieDetails?.some(
+          (detail) => detail.id === movieId
+        );
         if (!movieExists) {
           setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
         }
@@ -65,16 +66,14 @@ const MovieListItem = ({ movieId }) => {
 
     // Cleanup-Funktion
     return () => window.removeEventListener("resize", handleResize);
-  }, [movieId, setMovieDetails]);
-
-  console.log(outerWidth);
+  }, [movieId, setMovieDetails, movieDetails]);
 
   // Return null if image configuration is not available
   if (!config?.images) {
     return null;
   }
 
-  let movie = movieDetails.find((detail) => detail.id === movieId);
+  let movie = movieDetails.find((detail) => detail?.id === movieId);
   if (!movie) {
     // Display loading message if movie is not found
     return <div>Lade Film...</div>;
@@ -103,11 +102,9 @@ const MovieListItem = ({ movieId }) => {
     vote_average,
   } = movie;
 
- 
   const releaseYear = release_date
     ? new Date(release_date).getFullYear()
     : "Unknown";
-
 
   const { secure_base_url, poster_sizes, backdrop_sizes } = config.images;
   const imageURLPoster = `${secure_base_url}${poster_sizes[6]}${poster_path}`;
@@ -133,10 +130,12 @@ const MovieListItem = ({ movieId }) => {
     }
   };
 
-  // console.log(window);
-
   return (
-    <Link to={`/detail/${movie.id}`} className="link">
+    <Link
+      to={`/detail/${movie.id}`}
+      className="link"
+      onClick={() => window.scrollTo(0, 0)}
+    >
       <li key={movieId} className="movie-card">
         <div className="image-wrapper">
           <img
@@ -171,10 +170,8 @@ const MovieListItem = ({ movieId }) => {
           </div>
         </div>
         <img
-
           onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
           className="favorites"
-
           src="src\components\SVG\Vector.svg"
           alt=""
         />
@@ -183,7 +180,7 @@ const MovieListItem = ({ movieId }) => {
           className="download-icon"
           src="src\components\SVG\Download.svg"
           alt=""
-        />  
+        />
       </li>
     </Link>
   );
