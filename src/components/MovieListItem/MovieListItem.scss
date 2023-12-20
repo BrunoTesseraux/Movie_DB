@@ -159,14 +159,15 @@
       }
 
       .movie-card-content {
+        padding-inline: 3%;
+      }
+      .favorites {
+        position: absolute;
+        top: 10px; /* Anpassen nach Bedarf */
+        right: 10px;
+        z-index: 10;
       }
     }
-  }
-
-  .favorites {
-    position: absolute;
-    top: 10px; /* Anpassen nach Bedarf */
-    right: 10px;
   }
 }
 

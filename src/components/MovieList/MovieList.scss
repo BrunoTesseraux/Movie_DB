@@ -27,6 +27,7 @@
   .movies-list-desktop {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    column-gap: 3rem;
   }
 }
 
