@@ -10,7 +10,7 @@ import back from "./../../assets/icons/back.svg";
 import save from "./../../assets/icons/save.svg";
 import download from "./../../assets/icons/download.svg";
 import ButtonBack from "../Button/ButtonBack";
-import Slider from "../Slider/Slider";
+// import Slider from "../Slider/Slider";
 
 const Details = () => {
   //useContext from fetch
@@ -163,7 +163,7 @@ const Details = () => {
             </div>
           </article>
         ))}
-        <Slider />
+        {/* <Slider /> */}
       </section>
     </>
   );
