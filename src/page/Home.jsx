@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MovieList from "../components/MovieList/MovieList";
 import NavBar from "../components/NavBar/NavBar";
 import Searchbar from "../components/Searchbar/Searchbar";
@@ -11,12 +12,12 @@ const upcomingURL =
 import "./Home.scss";
 const Home = (onAllResultsChange) => {
   return (
-    <main>
+    <main className="main-home">
       <div cla>Welcome!</div>
       <Searchbar />
       <div className="heading-slider">
         <h1>Trending Movies</h1>
-        <a href="">See all</a>
+        <Link to="/movies">See all</Link>
       </div>
       <SliderComponent
         fetchUrl={trendingURL}

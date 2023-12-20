@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import ButtonBack from "../Button/ButtonBack";
 import "./Trailer.scss";
-import YouTube from "react-youtube";
 import back from "./../../assets/icons/back.svg";
 
 const Trailer = () => {

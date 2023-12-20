@@ -15,37 +15,35 @@ const Favoriten = () => {
   const { secure_base_url, poster_sizes } = config.images;
   const imageURL = `${secure_base_url}${poster_sizes[0]}`;
 
-  
   const removeFromFavorites = (indexToRemove) => {
-    const updatedFavorites = favorites.filter((_, index) => index !== indexToRemove);
+    const updatedFavorites = favorites.filter(
+      (_, index) => index !== indexToRemove
+    );
     setFavorites(updatedFavorites);
   };
 
   return (
-    
-      <div className="container">
-        <h2>Meine Favoriten</h2>
-        <div className="favorites-list">
-          {favorites.map((movie, index) => (
-            <div key={index} className="favorite-item">
-              <img
-                className="Poster"
-                src={`${imageURL}${movie.poster_path}`}
-                alt={`Bild des Films ${movie.title}`}
-              />
-              <button
-                className="Button"
-                onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
-              >
-                Löschen
-              </button>
-            </div>
-          ))}
-        </div>
-        <NavBar />
+    <div className="favoriten-container">
+      <h2>Meine Favoriten</h2>
+      <div className="favorites-list">
+        {favorites.map((movie, index) => (
+          <div key={index} className="favorite-item">
+            <img
+              className="Poster"
+              src={`${imageURL}${movie.poster_path}`}
+              alt={`Bild des Films ${movie.title}`}
+            />
+            <button
+              className="Button"
+              onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
+            >
+              Löschen
+            </button>
+          </div>
+        ))}
       </div>
-      
-    
+      <NavBar />
+    </div>
   );
 };
 
