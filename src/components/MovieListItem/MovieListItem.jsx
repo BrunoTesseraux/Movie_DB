@@ -9,7 +9,7 @@ const MovieListItem = ({ movieId }) => {
   // Accessing context values
   const { config, movieDetails, setMovieDetails, genreValue, searchTerm } =
     useContext(MovieContext);
-
+  console.log(movieDetails);
   // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
     .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
