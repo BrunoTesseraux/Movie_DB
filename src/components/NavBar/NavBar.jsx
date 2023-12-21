@@ -23,9 +23,7 @@ const NavBar = () => {
             }`}
           />
           <span
-            className={`imageText ${
-              location.pathname === "/" ? "active" : ""
-            }`}
+            className={`imageText ${location.pathname === "/" ? "active" : ""}`}
           >
             Home
           </span>

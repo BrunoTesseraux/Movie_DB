@@ -14,7 +14,6 @@ import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { downloadDaten } from "../Downloads/DownloadsDaten";
 
 
-
 const Details = () => {
   //useContext from fetch
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);

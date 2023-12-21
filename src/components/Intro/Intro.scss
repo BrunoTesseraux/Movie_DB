@@ -1,0 +1,100 @@
+.section-intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  position: relative;
+
+  .intro-imgs-wrapper {
+    height: 55vh;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(
+      341deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(252, 33, 33, 0.8) 20%,
+      rgba(252, 33, 33, 0.8) 75%,
+      rgba(255, 255, 255, 1) 100%
+    );
+
+    .intro-img1 {
+      width: 65%;
+      position: absolute;
+      top: 12%;
+      left: 2%;
+    }
+
+    .intro-img2 {
+      width: 65%;
+      position: relative;
+      top: 20%;
+      right: -15%;
+    }
+  }
+
+  .intro-content {
+    position: relative;
+    height: 45vh;
+    background-color: #fff;
+    padding-inline: 5%;
+    padding-bottom: 80px;
+
+    .intro-content-headline {
+      margin-top: 3.125rem;
+      font-size: 1.75rem;
+      font-family: "Poppins-Bd";
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-content-text {
+      font-family: "Poppins-Rg";
+      font-size: 18px;
+      margin-bottom: 2.5rem;
+    }
+
+    .login-button {
+      background-color: #fc2121;
+      color: #fff;
+      font-family: "Poppins-Bd";
+      font-size: 18px;
+      padding: 15px 50px;
+      border-radius: 10px;
+      border: none;
+    }
+  }
+}
+
+@-webkit-keyframes scale-in-ver-top {
+  0% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}
+@keyframes scale-in-ver-top {
+  0% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}
