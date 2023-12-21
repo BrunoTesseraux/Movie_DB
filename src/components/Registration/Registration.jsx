@@ -28,20 +28,24 @@ const Registration = () => {
   console.log(isLoggedIn);
 
   useEffect(() => {
-    const usersFromLocalStorage = localStorage.getItem("users");
+    const usersFromLocalStorage = localStorage.getItem("users") || "[]"; // Default-Wert, falls nichts im LocalStorage ist
     const parsedUserObj = JSON.parse(usersFromLocalStorage);
-    const isActiveValueFromLocalStorage = localStorage.getItem("isActive");
-    const isActiveValue = JSON.parse(isActiveValueFromLocalStorage);
     setUsers(parsedUserObj);
-    setIsActive(isActiveValue);
-    console.log(users);
-  }, [email, password, setIsLoggedIn, isActive]);
 
-  const handleRegistrationSubmit = () => {
-    // !! Localstorage setter to set userData for Testing login
-    let allUsers = [...users, { firstname, lastname, email, password }];
+    const isActiveValueFromLocalStorage = localStorage.getItem("isActive");
+    const isActiveValue = isActiveValueFromLocalStorage
+      ? JSON.parse(isActiveValueFromLocalStorage)
+      : false; // Default false
+    setIsActive(isActiveValue);
+  }, [email, password, setIsLoggedIn, isActive, setIsActive, setUsers]);
+
+  const handleRegistrationSubmit = (e) => {
+    e.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+
+    let allUsers = users
+      ? [...users, { firstname, lastname, email, password }]
+      : [{ firstname, lastname, email, password }];
     setUsers(allUsers);
-    console.log(allUsers);
     localStorage.setItem("users", JSON.stringify(allUsers));
     navigate("/login");
 
