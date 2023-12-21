@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
+import logored2 from "./../../assets/logos/logored2.svg";
+import bg from "./../../assets/images/bg.avif";
 
 const Registration = () => {
   const {
@@ -70,75 +72,79 @@ const Registration = () => {
   };
 
   return (
-    <section className="section-registration">
-      <h1 className="text-logo">
-        Super <span>.Stream</span>
-      </h1>
-      <div className="registration-signin">
-        <Link
-          to="/login"
-          className={`registration-headline ${isActive ? null : "form-active"}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Sign In
-        </Link>
-        <Link
-          to="/registration"
-          className={`registration-headline ${isActive ? "form-active" : null}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Registration
-        </Link>
-      </div>
-      <form className="registration-form">
-        <input
-          type="text"
-          name="firstname"
-          id="firstname"
-          className="registration-input"
-          placeholder="Firstname"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-        />
-        <input
-          type="text"
-          name="lastname"
-          id="lastname"
-          className="registration-input"
-          placeholder="Lastname"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="registration-input"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="registration-input"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="submit"
-          value="Registration"
-          className="registration-button"
-          onClick={handleRegistrationSubmit}
-        />
-
-        <div className="informations">
-          <span className="need-help">Need help?</span>
+    <section className="section-wrapper">
+      <img src={bg} alt="" className="background" />
+      <section className="section-registration">
+        <img src={logored2} alt="" className="login-logo" />
+        <div className="registration-signin">
+          <Link
+            to="/login"
+            className={`login-headline ${isActive ? null : "form-active"}`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/registration"
+            className={`registration-headline ${
+              isActive ? "form-active" : null
+            }`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Registration
+          </Link>
         </div>
-      </form>
+
+        <form className="registration-form">
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            className="registration-input"
+            placeholder="Firstname"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            className="registration-input"
+            placeholder="Lastname"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="registration-input"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="registration-input"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="submit"
+            value="Registration"
+            className="registration-button"
+            onClick={handleRegistrationSubmit}
+          />
+
+          <div className="informations">
+            <span className="need-help">Need help?</span>
+          </div>
+        </form>
+      </section>
     </section>
   );
 };

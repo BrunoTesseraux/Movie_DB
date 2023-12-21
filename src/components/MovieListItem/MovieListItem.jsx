@@ -10,10 +10,12 @@ import ButtonIconOnly from "../Button/ButtonIconOnly";
 import save from "./../../assets/icons/save.svg";
 import savewhite from "./../../assets/icons/savewhite.svg";
 import download from "./../../assets/icons/download.svg";
+import downloadwhite from "./../../assets/icons/downloadwhite.svg";
 
 const MovieListItem = ({ movieId }) => {
   // useState for clicked button
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [buttonOneClicked, setButtonOneClicked] = useState(false);
+  const [buttonTwoClicked, setButtonTwoClicked] = useState(false);
 
   // Accessing context values
   const {
@@ -124,7 +126,7 @@ const MovieListItem = ({ movieId }) => {
     } else {
       favoritenDaten.push(movie);
       setIsInFavorites(true);
-      setButtonClicked(true);
+      setButtonOneClicked(true);
       console.log("Film zu Favoriten hinzugefügt:", movie);
     }
   };
@@ -135,7 +137,7 @@ const MovieListItem = ({ movieId }) => {
     } else {
       downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
       setIsInDownloads(true);
-      setButtonClicked(true);
+      setButtonTwoClicked(true);
       console.log("Film zu Downloads hinzugefügt:", movie);
     }
   };
@@ -191,19 +193,23 @@ const MovieListItem = ({ movieId }) => {
         <div className="movie-card-functions">
           <button
             className={
-              buttonClicked
+              buttonOneClicked
                 ? "secondary-btn-icon-only-clicked"
                 : "secondary-btn-icon-only"
             }
             onClick={handleAddToFavorites}
           >
-            <img src={buttonClicked ? savewhite : save} alt="" />
+            <img src={buttonOneClicked ? savewhite : save} alt="" />
           </button>
           <button
-            className="secondary-btn-icon-only"
+            className={
+              buttonTwoClicked
+                ? "secondary-btn-icon-only-clicked"
+                : "secondary-btn-icon-only"
+            }
             onClick={handleAddToDownloads}
           >
-            <img src={download} alt="" />
+            <img src={buttonTwoClicked ? downloadwhite : download} alt="" />
           </button>
         </div>
       </div>
