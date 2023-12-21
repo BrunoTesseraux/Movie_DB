@@ -14,14 +14,24 @@ import { useContext, useEffect, useState } from "react";
 import Splash from "../components/Splash/Splash";
 import { MovieContext } from "../components/Context/MovieContext";
 import Intro from "../components/Intro/Intro";
+import LoginSignUp from "../components/LoginSignUp/LoginSignUp";
 
 const Home = (onAllResultsChange) => {
-  const { setShowSplash, displaySplash, setDisplaySplash } =
-    useContext(MovieContext);
+  const {
+    setShowSplash,
+    displaySplash,
+    setDisplaySplash,
+    isLoggedIn,
+    setIsLoggedIn,
+  } = useContext(MovieContext);
   // const [showSplash, setShowSplash] = useState(false);
-
+  console.log(isLoggedIn);
   useEffect(() => {
     const isFirstVisit = localStorage.getItem("firstVisit") === null;
+    const loggedIn = localStorage.getItem("loggedIn") === null;
+    console.log(loggedIn);
+
+    // console.log(loggedIn);
     if (isFirstVisit) {
       localStorage.setItem("firstVisit", "no");
       setShowSplash(true);
@@ -34,12 +44,22 @@ const Home = (onAllResultsChange) => {
     } else {
       setDisplaySplash(false);
     }
-  }, [setShowSplash]);
+
+    if (loggedIn === "true") {
+      setIsLoggedIn(true);
+    }
+
+    if (isLoggedIn) {
+      localStorage.setItem("loggedIn", isLoggedIn);
+    }
+  }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
   return (
     <>
-      {/* {displaySplash ? (
+      {displaySplash ? (
         <Splash />
+      ) : !displaySplash && isLoggedIn === false ? (
+        <Intro />
       ) : (
         <main className="main-home">
           <div cla>Welcome!</div>
@@ -59,8 +79,8 @@ const Home = (onAllResultsChange) => {
           <SliderComponent fetchUrl={upcomingURL} />
           <NavBar />
         </main>
-      )} */}
-      <Intro />
+      )}
+      {/* <LoginSignUp /> */}
     </>
   );
 };

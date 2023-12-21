@@ -12,6 +12,11 @@ const MovieContextProvider = ({ children }) => {
   const [innerWidth, setInnerWidth] = useState(window.outerWidth);
   const [showSplash, setShowSplash] = useState(false);
   const [displaySplash, setDisplaySplash] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [toSignIn, setToSignIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [users, setUsers] = useState([]);
 
   return (
     <MovieContext.Provider
@@ -34,6 +39,16 @@ const MovieContextProvider = ({ children }) => {
         setShowSplash,
         displaySplash,
         setDisplaySplash,
+        isLoggedIn,
+        setIsLoggedIn,
+        email,
+        setEmail,
+        password,
+        setPassword,
+        users,
+        setUsers,
+        toSignIn,
+        setToSignIn,
       }}
     >
       {children}
