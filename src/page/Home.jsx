@@ -59,6 +59,7 @@ const Home = (onAllResultsChange) => {
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
   return (
+
     <>
       {displaySplash ? (
         <Splash />
@@ -87,7 +88,6 @@ const Home = (onAllResultsChange) => {
             <Link to="/allupcoming">See all</Link>
           </div>
           <SliderNetflixStyle fetchUrl={trendingURL} />
-          <NavBar />
         </main>
       )}
       {/* <LoginSignUp /> */}

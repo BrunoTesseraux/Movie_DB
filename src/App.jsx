@@ -45,6 +45,7 @@ function App() {
             element={<FilteredMovieList fetchUrl={upcomingURL} />}
           />
         </Routes>
+        <NavBar/>
         {/* <Footer /> */}
       </MovieContextProvider>
     </div>

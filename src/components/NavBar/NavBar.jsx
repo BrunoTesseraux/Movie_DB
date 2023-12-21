@@ -1,7 +1,8 @@
 import "./NavBar.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
+  const location = useLocation();
   return (
     <div className="NavBar ">
       <Link
