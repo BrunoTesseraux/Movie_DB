@@ -17,7 +17,7 @@ import Trailer from "./components/Trailer/Trailer";
 
 function App() {
   return (
-    <>
+    <div>
       <MovieContextProvider>
         <FetchMovies />
 
@@ -33,7 +33,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>
-    </>
+    </div>
   );
 }
 

@@ -11,7 +11,6 @@ import save from "./../../assets/icons/save.svg";
 import download from "./../../assets/icons/download.svg";
 import ButtonBack from "../Button/ButtonBack";
 
-
 const Details = () => {
   //useContext from fetch
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
@@ -182,7 +181,6 @@ const Details = () => {
             </Link>
           </div>
         </article>
-
       </section>
     </>
   );

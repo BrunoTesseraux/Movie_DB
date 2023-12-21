@@ -10,10 +10,13 @@ const upcomingURL =
   "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
 import "./Home.scss";
+import SliderNetflixStyle from "../components/Slider/SliderNetflixStyle";
+import DarkMode from "../components/DarkMode/DarkMode";
 const Home = (onAllResultsChange) => {
   return (
     <main className="main-home">
-      <div cla>Welcome!</div>
+      <div>Welcome!</div>
+      <DarkMode />
       <Searchbar />
       <div className="heading-slider">
         <h1>Trending Movies</h1>
@@ -28,6 +31,7 @@ const Home = (onAllResultsChange) => {
         <a href="">See all</a>
       </div>
       <SliderComponent fetchUrl={upcomingURL} />
+      <SliderNetflixStyle fetchUrl={trendingURL} />
       <NavBar />
     </main>
   );
