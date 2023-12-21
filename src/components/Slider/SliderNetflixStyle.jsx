@@ -100,7 +100,11 @@ const SliderNetflixStyle = ({ fetchUrl }) => {
                   alt={`Slide`}
                 />
               </div>
-              <h2>{slide.title}</h2>{" "}
+              <h2>
+                {innerWidth <= 992
+                  ? slide.title.substring(0, 30)
+                  : slide.title.substring(0, 15)}
+              </h2>
               <div className="content-netflix">
                 <img className="rating_star" src={rating} alt="" />
                 <p>{slide.vote_average.toFixed(1)} / 10.0</p>

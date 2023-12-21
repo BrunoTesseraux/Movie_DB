@@ -17,8 +17,12 @@ import Trailer from "./components/Trailer/Trailer";
 import Intro from "./components/Intro/Intro";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 import Registration from "./components/Registration/Registration";
+import FilteredMovieList from "./components/FilteredMovieList/FilteredMovieList";
 
 function App() {
+  const upcomingURL =
+    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+
   return (
     <div>
       <MovieContextProvider>
@@ -36,6 +40,10 @@ function App() {
           <Route path="/intro" element={<Intro />} />
           <Route path="/login" element={<LoginSignUp />} />
           <Route path="/registration" element={<Registration />} />
+          <Route
+            path="/allupcoming"
+            element={<FilteredMovieList fetchUrl={upcomingURL} />}
+          />
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>

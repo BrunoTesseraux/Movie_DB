@@ -81,7 +81,12 @@ const Home = (onAllResultsChange) => {
             <h1>Upcoming Movies</h1>
             <a href="">See all</a>
           </div>
-          <SliderComponent fetchUrl={upcomingURL} />
+          <SliderNetflixStyle fetchUrl={upcomingURL} />
+          <div className="heading-slider">
+            <h1>Trending Movies</h1>
+            <Link to="/allupcoming">See all</Link>
+          </div>
+          <SliderNetflixStyle fetchUrl={trendingURL} />
           <NavBar />
         </main>
       )}
