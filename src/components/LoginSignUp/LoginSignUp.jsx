@@ -89,6 +89,8 @@ const LoginSignUp = () => {
     localStorage.setItem("isActive", !isActive);
   };
 
+  console.log(email);
+  console.log(password);
   return (
     <section
       className={`section-login ${isNavigatingFromIntro ? "animate" : ""}`}
