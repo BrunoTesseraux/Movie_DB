@@ -83,10 +83,13 @@ const LoginSignUp = () => {
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
+      console.log(isActive);
+      localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
       setIsActive(true);
+      console.log(isActive);
+      localStorage.setItem("isActive", !isActive);
     }
-    localStorage.setItem("isActive", !isActive);
   };
 
   console.log(email);
