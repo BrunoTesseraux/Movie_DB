@@ -28,7 +28,7 @@ const Home = (onAllResultsChange) => {
         <a href="">See all</a>
       </div>
       <SliderComponent fetchUrl={upcomingURL} />
-      <NavBar />
+      {/* <NavBar /> */}
     </main>
   );
 };

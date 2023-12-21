@@ -31,6 +31,7 @@ function App() {
           <Route path="/movies" element={<MovieList />} />
           <Route path="/trailer/:id" element={<Trailer />} />
         </Routes>
+        <NavBar/>
         {/* <Footer /> */}
       </MovieContextProvider>
     </>
