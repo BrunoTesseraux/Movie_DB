@@ -21,7 +21,7 @@ const MovieListItem = ({ movieId }) => {
     movieDetails,
     setMovieDetails,
     genreValue,
-    searchTerm,
+    localSearchTerm,
     innerWidth,
     setInnerWidth,
   } = useContext(MovieContext);
@@ -88,8 +88,8 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Checking if movie matches search term and selected genre
-  const titleMatchesSearchTerm = searchTerm
-    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const titleMatchesSearchTerm = localSearchTerm
+    ? movie.title.toLowerCase().includes(localSearchTerm.toLowerCase())
     : true;
   const genreMatches = genreValue
     ? movie.genres.some((genre) => genre.name === genreValue)

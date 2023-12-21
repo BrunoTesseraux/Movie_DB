@@ -22,6 +22,7 @@ const MovieContextProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [hasAnimationPlayed, setHasAnimationPlayed] = useState(false);
   const [isNavigatingFromIntro, setIsNavigatingFromIntro] = useState(false);
+  const [localSearchTerm, setLocalSearchTerm] = useState("");
 
   return (
     <MovieContext.Provider
@@ -64,6 +65,8 @@ const MovieContextProvider = ({ children }) => {
         setHasAnimationPlayed,
         isNavigatingFromIntro,
         setIsNavigatingFromIntro,
+        localSearchTerm,
+        setLocalSearchTerm,
       }}
     >
       {children}
