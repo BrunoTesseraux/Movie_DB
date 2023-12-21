@@ -12,7 +12,7 @@ import download from "./../../assets/icons/download.svg";
 import ButtonBack from "../Button/ButtonBack";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { downloadDaten } from "../Downloads/DownloadsDaten";
-
+import SliderNetflixStyle from "../Slider/SliderNetflixStyle";
 
 const Details = () => {
   //useContext from fetch
@@ -31,6 +31,8 @@ const Details = () => {
 
   const selectedMovieID = selectedMoviePath.id;
   // console.log(selectedMovieID);
+
+  const similarAPI = `https://api.themoviedb.org/3/movie/${selectedMovieID}/similar?language=en-US&page=1`;
 
   const selectedMovieInfos = allMovies.filter((movie) => {
     return movie.id.toString() === selectedMovieID.toString();
@@ -105,14 +107,12 @@ const Details = () => {
     vote_average,
   } = movie;
 
-
   const [isInFavorites, setIsInFavorites] = useState(
     favoritenDaten.some((favMovie) => favMovie.id === selectedMovieID)
   );
   const [isInDownloads, setIsInDownloads] = useState(
     downloadDaten.some((dowmMovie) => dowmMovie.id === selectedMovieID)
   );
-
 
   const handleAddToFavorites = () => {
     if (isInFavorites) {
@@ -152,19 +152,18 @@ const Details = () => {
                 // onClick={() => window.scrollTo(0, 0)}
               />
               <div className="save-download-wrapper">
-              <button
-                className="secondary-btn-icon-only"
-                onClick={handleAddToFavorites}
-              >
-                <img src={save} alt="" />
-              </button>
-              <button
-                className="secondary-btn-icon-only"
-                onClick={handleAddToDownloads}
-              >
-              <img src={download} alt="" />
-              </button>
-                
+                <button
+                  className="secondary-btn-icon-only"
+                  onClick={handleAddToFavorites}
+                >
+                  <img src={save} alt="" />
+                </button>
+                <button
+                  className="secondary-btn-icon-only"
+                  onClick={handleAddToDownloads}
+                >
+                  <img src={download} alt="" />
+                </button>
               </div>
             </div>
             <div className="key-infos">
@@ -223,6 +222,7 @@ const Details = () => {
               <Button icon={play} content="Watch now"></Button>
             </Link>
           </div>
+          <SliderNetflixStyle fetchUrl={similarAPI} />
         </article>
       </section>
     </>
