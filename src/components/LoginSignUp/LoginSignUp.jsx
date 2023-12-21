@@ -59,12 +59,6 @@ const LoginSignUp = () => {
       return;
     }
 
-    // !! Localstorage setter to set userData for Testing login
-    // let allUsers = [...users, { email, password }];
-    // setUsers(allUsers);
-    // console.log(allUsers);
-    // localStorage.setItem("users", JSON.stringify(allUsers));
-
     let isUserValid = false;
     for (const singleUser of users) {
       if (singleUser.email === email && singleUser.password === password) {
@@ -74,10 +68,13 @@ const LoginSignUp = () => {
       }
     }
 
+    setEmail("");
+    setPassword("");
+
     if (isUserValid) {
       localStorage.setItem("loggedIn", "true");
-      navigate("/");
       setIsLoggedIn(true);
+      navigate("/");
     } else {
       console.log("Email or password not correct! Please try again.");
     }
