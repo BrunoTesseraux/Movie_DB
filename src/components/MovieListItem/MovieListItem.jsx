@@ -3,6 +3,7 @@ import "./MovieListItem.scss";
 import { MovieContext } from "../Context/MovieContext";
 import { downloadDaten } from "../Downloads/DownloadsDaten";
 import rating from "./../../assets/icons/rating.svg";
+import loader from "./../../assets/gif/lodading-spinner.gif";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
 
@@ -76,7 +77,7 @@ const MovieListItem = ({ movieId }) => {
   let movie = movieDetails.find((detail) => detail?.id === movieId);
   if (!movie) {
     // Display loading message if movie is not found
-    return <div>Lade Film...</div>;
+    return <img src={loader} />;
   }
 
   // Checking if movie matches search term and selected genre
