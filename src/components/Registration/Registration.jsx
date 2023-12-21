@@ -15,6 +15,16 @@ const Registration = () => {
     setFirstname,
     lastname,
     setLastname,
+    street,
+    setStreet,
+    houseNumber,
+    setHouseNumber,
+    postalCode,
+    setPostalCode,
+    country,
+    setCountry,
+    birthdate,
+    setBirthdate,
     users,
     setUsers,
     isLoggedIn,
@@ -43,8 +53,38 @@ const Registration = () => {
     e.preventDefault();
 
     let allUsers = users
-      ? [...users, { firstname, lastname, email, password }]
-      : [{ firstname, lastname, email, password }];
+      ? [
+          ...users,
+          {
+            firstname,
+            lastname,
+            email,
+            password,
+            address: {
+              street,
+              houseNumber,
+              postalCode,
+              country,
+            },
+            birthdate,
+          },
+        ]
+      : [
+          {
+            firstname,
+            lastname,
+            email,
+            password,
+            address: {
+              street,
+              houseNumber,
+              postalCode,
+              country,
+            },
+            birthdate,
+          },
+        ];
+
     setUsers(allUsers);
     localStorage.setItem("users", JSON.stringify(allUsers));
     setIsActive(false);
@@ -54,6 +94,11 @@ const Registration = () => {
     setLastname("");
     setEmail("");
     setPassword("");
+    setStreet("");
+    setHouseNumber("");
+    setPostalCode("");
+    setCountry("");
+    setBirthdate("");
     navigate("/login");
   };
 
@@ -108,6 +153,51 @@ const Registration = () => {
           placeholder="Lastname"
           value={lastname}
           onChange={(e) => setLastname(e.target.value)}
+        />
+        <input
+          type="text"
+          name="street"
+          id="street"
+          className="registration-input"
+          placeholder="Street"
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
+        />
+        <input
+          type="text"
+          name="houseNumber"
+          id="houseNumber"
+          className="registration-input"
+          placeholder="House Number"
+          value={houseNumber}
+          onChange={(e) => setHouseNumber(e.target.value)}
+        />
+        <input
+          type="text"
+          name="postalCode"
+          id="postalCode"
+          className="registration-input"
+          placeholder="Postal Code"
+          value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
+        />
+        <input
+          type="text"
+          name="country"
+          id="country"
+          className="registration-input"
+          placeholder="Country"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        />
+        <input
+          type="date"
+          name="birthdate"
+          id="birthdate"
+          className="registration-input"
+          placeholder="Birthdate"
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
         />
         <input
           type="email"
