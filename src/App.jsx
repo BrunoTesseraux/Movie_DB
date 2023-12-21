@@ -14,6 +14,8 @@ import Profile from "./components/Profile/Profile";
 import Favoriten from "./components/Favoriten/Favoriten";
 import Downloads from "./components/Downloads/Downloads";
 import Trailer from "./components/Trailer/Trailer";
+import Intro from "./components/Intro/Intro";
+import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/movies" element={<MovieList />} />
           <Route path="/trailer/:id" element={<Trailer />} />
+          <Route path="/intro" element={<Intro />} />
+          <Route path="/login" element={<LoginSignUp />} />
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>
