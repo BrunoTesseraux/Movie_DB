@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
+import logored2 from "./../../assets/logos/logored2.svg";
+import bg from "./../../assets/images/bg.avif";
 
 const Registration = () => {
   const {
@@ -115,25 +117,28 @@ const Registration = () => {
   };
 
   return (
-    <section className="section-registration">
-      <h1 className="text-logo">
-        Super <span>.Stream</span>
-      </h1>
-      <div className="registration-signin">
-        <Link
-          to="/login"
-          className={`registration-headline ${isActive ? null : "form-active"}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Sign In
-        </Link>
-        <Link
-          to="/registration"
-          className={`registration-headline ${isActive ? "form-active" : null}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Registration
-        </Link>
+
+    <section className="section-wrapper">
+      <img src={bg} alt="" className="background" />
+      <section className="section-registration">
+        <img src={logored2} alt="" className="login-logo" />
+        <div className="registration-signin">
+          <Link
+            to="/login"
+            className={`login-headline ${isActive ? null : "form-active"}`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/registration"
+            className={`registration-headline ${
+              isActive ? "form-active" : null
+            }`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Registration
+          </Link>
       </div>
       <form className="registration-form">
         <input
@@ -227,8 +232,9 @@ const Registration = () => {
 
         <div className="informations">
           <span className="need-help">Need help?</span>
-        </div>
-      </form>
+          </div>
+        </form>
+      </section>
     </section>
   );
 };
