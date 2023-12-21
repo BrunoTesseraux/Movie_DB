@@ -10,6 +10,10 @@ const upcomingURL =
   "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
 import "./Home.scss";
+
+import SliderNetflixStyle from "../components/Slider/SliderNetflixStyle";
+import DarkMode from "../components/DarkMode/DarkMode";
+
 import { useContext, useEffect, useState } from "react";
 import Splash from "../components/Splash/Splash";
 import { MovieContext } from "../components/Context/MovieContext";
@@ -55,6 +59,7 @@ const Home = (onAllResultsChange) => {
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
   return (
+
     <>
       {displaySplash ? (
         <Splash />
@@ -62,7 +67,8 @@ const Home = (onAllResultsChange) => {
         <Intro />
       ) : (
         <main className="main-home">
-          <div cla>Welcome!</div>
+          <div>Welcome!</div>
+              <DarkMode />
           <Searchbar />
           <div className="heading-slider">
             <h1>Trending Movies</h1>

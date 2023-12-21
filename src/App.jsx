@@ -19,7 +19,7 @@ import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 
 function App() {
   return (
-    <>
+    <div>
       <MovieContextProvider>
         <FetchMovies />
 
@@ -37,7 +37,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>
-    </>
+    </div>
   );
 }
 

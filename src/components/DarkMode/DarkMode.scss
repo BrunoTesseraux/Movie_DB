@@ -1,0 +1,29 @@
+.dark {
+  background-color: black;
+  .carusel {
+    .switch-left,
+    .switch-right {
+      color: white;
+    }
+    .slide-netflix {
+      box-shadow: 0 0 10px white;
+      .sliderlink-netflix {
+        color: white;
+      }
+    }
+  }
+}
+.light {
+  .carusel {
+    .switch-left,
+    .switch-right {
+      color: black;
+    }
+    .slide-netflix {
+      box-shadow: 0 0 10px black;
+      .sliderlink-netflix {
+        color: black;
+      }
+    }
+  }
+}

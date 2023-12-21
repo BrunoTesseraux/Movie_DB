@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { MovieContext } from "../Context/MovieContext";
-import "./Slider.scss";
+import "./SliderComponent.scss";
 import rating from "./../../assets/icons/rating.svg";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const SliderComponent = ({ fetchUrl }) => {
   const { config } = useContext(MovieContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
-  const [scrolled, setScrolled] = useState(false); // Zustand für das Scrolling hinzugefügt
+  const [scrolled, setScrolled] = useState(false);
 
   const options = {
     method: "GET",
@@ -33,31 +33,30 @@ const SliderComponent = ({ fetchUrl }) => {
     };
 
     fetchData();
-  }, [fetchUrl]);
 
-  if (!slideData[0]?.id === undefined) {
-    return;
-  }
+    const intervalId = setInterval(() => {
+      goToNext();
+    }, 5000);
 
-  console.log(slideData);
+    return () => clearInterval(intervalId);
+  }, [fetchUrl, currentIndex]);
 
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
-    setScrolled(false); // Zurücksetzen von scrolled auf false beim Start der Berührung
+    setScrolled(false);
   };
 
   const handleTouchMove = (e) => {
     const touchEnd = e.touches[0].clientX;
     const touchDiff = touchStart - touchEnd;
-
     const scrollThreshold = 30;
 
     if (touchDiff > scrollThreshold && !scrolled) {
       goToNext();
-      setScrolled(true); // Setzen von scrolled auf true nach dem Scrollen
+      setScrolled(true);
     } else if (touchDiff < -scrollThreshold && !scrolled) {
       goToPrevious();
-      setScrolled(true); // Setzen von scrolled auf true nach dem Scrollen
+      setScrolled(true);
     }
   };
 
@@ -95,6 +94,7 @@ const SliderComponent = ({ fetchUrl }) => {
               className={`slide ${index === currentIndex ? "active" : ""}`}
             >
               <Link
+                onClick={() => window.scrollTo(0, 0)}
                 className={`sliderlink ${
                   index === currentIndex ? "active-link" : ""
                 }`}
@@ -102,11 +102,11 @@ const SliderComponent = ({ fetchUrl }) => {
                 to={`/detail/${slide.id}`}
               >
                 <img
-                  src={`${config.images.secure_base_url}${config.images.backdrop_sizes[0]}${slide.backdrop_path}`}
+                  src={`${config.images.secure_base_url}${config.images.backdrop_sizes[2]}${slide.backdrop_path}`}
                   alt={`Slide ${index + 1}`}
                 />
                 <div className="content">
-                  <h2>{slide.original_title}</h2>
+                  <h2>{slide.title}</h2>
                   <p className="rating_star">
                     <img src={rating} alt="" /> {slide.vote_average.toFixed(1)}{" "}
                     / 10.0
