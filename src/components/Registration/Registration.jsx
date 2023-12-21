@@ -40,30 +40,33 @@ const Registration = () => {
   }, [email, password, setIsLoggedIn, isActive, setIsActive, setUsers]);
 
   const handleRegistrationSubmit = (e) => {
-    e.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+    e.preventDefault();
 
     let allUsers = users
       ? [...users, { firstname, lastname, email, password }]
       : [{ firstname, lastname, email, password }];
     setUsers(allUsers);
     localStorage.setItem("users", JSON.stringify(allUsers));
-    navigate("/login");
-
+    setIsActive(false);
+    console.log(isActive);
+    localStorage.setItem("isActive", false);
     setFirstname("");
     setLastname("");
     setEmail("");
     setPassword("");
+    navigate("/login");
   };
 
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
       console.log(isActive);
+      localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
       console.log(isActive);
       setIsActive(true);
+      localStorage.setItem("isActive", !isActive);
     }
-    localStorage.setItem("isActive", !isActive);
   };
 
   return (

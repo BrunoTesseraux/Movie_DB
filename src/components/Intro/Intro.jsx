@@ -12,15 +12,21 @@ const Intro = () => {
     hasAnimationPlayed,
     setHasAnimationPlayed,
     setIsNavigatingFromIntro,
+    setIsActive,
+    isActive,
   } = useContext(MovieContext);
 
-  const handleGetStartedClick = () => {
+  const handleGetStartedClick = (e) => {
     setHasAnimationPlayed(true);
     setIsNavigatingFromIntro(true);
-    setToSignIn(true);
+    setToSignIn(!isActive);
+    console.log(isActive);
+    setIsActive(false);
+
+    localStorage.setItem("isActive", false);
   };
 
-  useEffect(() => {}, [toSignIn]);
+  useEffect(() => {}, [toSignIn, setIsActive]);
   console.log(toSignIn);
   return (
     <>
