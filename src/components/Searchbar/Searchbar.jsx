@@ -3,15 +3,8 @@ import { MovieContext } from "../Context/MovieContext";
 import "./Searchbar.scss";
 import searchIcon from "../../assets/icons/search-icon.svg";
 const Searchbar = () => {
-  const {
-    genres,
-    genreValue,
-    setGenreValue,
-    searchTerm,
-    setSearchTerm,
-    localSearchTerm,
-    setLocalSearchTerm,
-  } = useContext(MovieContext);
+  const { genres, genreValue, setGenreValue, searchTerm, setSearchTerm } =
+    useContext(MovieContext);
 
   console.log(genreValue);
   useEffect(() => {}, [genreValue]);
@@ -27,8 +20,8 @@ const Searchbar = () => {
             id="search"
             className="search"
             placeholder="Search Movie..."
-            value={localSearchTerm}
-            onChange={(e) => setLocalSearchTerm(e.target.value)}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <img src={searchIcon} alt="search-icon" className="search-icon" />
         </div>
