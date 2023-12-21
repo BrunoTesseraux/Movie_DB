@@ -16,7 +16,12 @@ const MovieContextProvider = ({ children }) => {
   const [toSignIn, setToSignIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [users, setUsers] = useState([]);
+  const [isActive, setIsActive] = useState(false);
+  const [hasAnimationPlayed, setHasAnimationPlayed] = useState(false);
+  const [isNavigatingFromIntro, setIsNavigatingFromIntro] = useState(false);
 
   return (
     <MovieContext.Provider
@@ -49,6 +54,16 @@ const MovieContextProvider = ({ children }) => {
         setUsers,
         toSignIn,
         setToSignIn,
+        isActive,
+        setIsActive,
+        firstname,
+        setFirstname,
+        lastname,
+        setLastname,
+        hasAnimationPlayed,
+        setHasAnimationPlayed,
+        isNavigatingFromIntro,
+        setIsNavigatingFromIntro,
       }}
     >
       {children}
