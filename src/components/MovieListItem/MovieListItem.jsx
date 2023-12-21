@@ -5,8 +5,15 @@ import { downloadDaten } from "../Downloads/DownloadsDaten";
 import rating from "./../../assets/icons/rating.svg";
 import { favoritenDaten } from "../Favoriten/FavoritenDaten";
 import { Link } from "react-router-dom";
+import ButtonIconOnly from "../Button/ButtonIconOnly";
+import save from "./../../assets/icons/save.svg";
+import savewhite from "./../../assets/icons/savewhite.svg";
+import download from "./../../assets/icons/download.svg";
 
 const MovieListItem = ({ movieId }) => {
+  // useState for clicked button
+  const [buttonClicked, setButtonClicked] = useState(false);
+
   // Accessing context values
   const {
     config,
@@ -116,6 +123,7 @@ const MovieListItem = ({ movieId }) => {
     } else {
       favoritenDaten.push(movie);
       setIsInFavorites(true);
+      setButtonClicked(true);
       console.log("Film zu Favoriten hinzugefügt:", movie);
     }
   };
@@ -126,17 +134,18 @@ const MovieListItem = ({ movieId }) => {
     } else {
       downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
       setIsInDownloads(true);
+      setButtonClicked(true);
       console.log("Film zu Downloads hinzugefügt:", movie);
     }
   };
 
   return (
-    <Link
-      to={`/detail/${movie.id}`}
-      className="link"
-      onClick={() => window.scrollTo(0, 0)}
-    >
-      <li key={movieId} className="movie-card">
+    <li key={movieId} className="movie-card">
+      <Link
+        to={`/detail/${movie.id}`}
+        className="link"
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <div className="image-wrapper">
           <img
             className={
@@ -146,30 +155,59 @@ const MovieListItem = ({ movieId }) => {
             alt={`Bild des Films ${title}`}
           />
         </div>
-        <div className="movie-card-content">
-          <h2 className="movie-card-headline">{title}</h2>
-          <div className="movie-card-infos">
-            <p className="movie-card-rating">
-              <img src={rating} alt="" className="rating-icon" />
-              {vote_average.toFixed(1)}
-            </p>
-            <p className="dot">⏺</p>
-            <p className="movie-card-release_date">{releaseYear}</p>
-            <p className="dot">⏺</p>
+      </Link>
+
+      <div className="movie-card-content-wrapper">
+        <Link
+          to={`/detail/${movie.id}`}
+          className="link"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <div className="movie-card-content">
+            <h2 className="movie-card-headline">{title}</h2>
+            <div className="movie-card-infos">
+              <p className="movie-card-rating">
+                <img src={rating} alt="" className="rating-icon" />
+                {vote_average.toFixed(1)}
+              </p>
+              <p className="dot">⏺</p>
+              <p className="movie-card-release_date">{releaseYear}</p>
+              <p className="dot">⏺</p>
+
+              <p className="movie-card-runtime">
+                {Math.floor(runtime / 60)}h {runtime % 60}m
+              </p>
+            </div>
 
             {genreValue && (
               <>
                 <p className="movie-card-genre">{genreValue}</p>
-                <p className="dot">⏺</p>
+                {/* <p className="dot">⏺</p> */}
               </>
             )}
-
-            <p className="movie-card-runtime">
-              {Math.floor(runtime / 60)}h {runtime % 60}m
-            </p>
           </div>
+        </Link>
+        <div className="movie-card-functions">
+          <button
+            className={
+              buttonClicked
+                ? "secondary-btn-icon-only-clicked"
+                : "secondary-btn-icon-only"
+            }
+            onClick={handleAddToFavorites}
+          >
+            <img src={buttonClicked ? savewhite : save} alt="" />
+          </button>
+          <button
+            className="secondary-btn-icon-only"
+            onClick={handleAddToDownloads}
+          >
+            <img src={download} alt="" />
+          </button>
         </div>
-        <img
+      </div>
+
+      {/* <img
           onClick={handleAddToFavorites} // Fügen Sie den onClick-Handler hinzu
           className="favorites"
           src="src\components\SVG\Vector.svg"
@@ -180,9 +218,8 @@ const MovieListItem = ({ movieId }) => {
           className="download-icon"
           src="src\components\SVG\Download.svg"
           alt=""
-        />
-      </li>
-    </Link>
+        /> */}
+    </li>
   );
 };
 
