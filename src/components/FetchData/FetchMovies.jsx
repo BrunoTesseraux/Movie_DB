@@ -17,21 +17,41 @@ const FetchMovies = () => {
   useEffect(() => {
     let newMovies = []; // Temporary array for the collected films
 
-    const fetchMovies = (pageIndex) => {
-      fetch(
-        `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
-        options
-      )
-        .then((response) => response.json())
-        .then((moviesData) => {
+    async function fetchMovies(pageIndex) {
+      //   fetch(
+      //     `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
+      //     options
+      //   )
+      //     .then((response) => response.json())
+      //     .then((moviesData) => {
+      //       newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
+      //       // get 5 pages from the api -> One Page have 20 Objects in an Array
+      //       if (pageIndex === 10) {
+      //         setAllMovies(newMovies); // set the state on the end of the bottom for loop
+      //       }
+      //     })
+      //     .catch((error) => console.log(error));
+      // };
+
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
+          options
+        );
+        if (response.ok) {
+          const moviesData = await response.json();
           newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
           // get 5 pages from the api -> One Page have 20 Objects in an Array
           if (pageIndex === 10) {
-            setAllMovies(newMovies); // set the state on the end of the bottom for loop
+            await setAllMovies(newMovies); // set the state on the end of the bottom for loop
           }
-        })
-        .catch((error) => console.log(error));
-    };
+          return newMovies;
+        }
+        throw new Error("Something went wrong");
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     for (let i = 1; i <= 10; i++) {
       fetchMovies(i);

@@ -69,11 +69,9 @@ const Details = () => {
     // };
   }, [selectedMovieID, setMovieDetails]);
 
-  console.log(movieDetails);
-
   //Array mit spoken languages
   const languages = movieDetails[0]?.spoken_languages;
-  console.log(languages);
+  // console.log(languages);
 
   const [englishName, setEnglishName] = useState(true);
 
@@ -176,7 +174,7 @@ const Details = () => {
               </div>
             </div>
 
-            <Link to="/trailer/${props.id}" className="linkTo">
+            <Link to={`/trailer/${movie.id}`} className="linkTo">
               <Button icon={play} content="Watch now"></Button>
             </Link>
           </div>

@@ -16,7 +16,7 @@ const MovieList = () => {
             innerWidth <= 992 ? "movies-list" : "movies-list-desktop"
           }`}
         >
-          {allMovies.map((movie, index) => (
+          {allMovies?.map((movie, index) => (
             <MovieListItem key={index} movieId={movie.id} />
           ))}
         </ul>

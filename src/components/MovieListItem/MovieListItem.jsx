@@ -48,21 +48,45 @@ const MovieListItem = ({ movieId }) => {
       },
     };
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((movieDetailsObj) => {
-        // Check if the movie is already in movieDetails
-        const movieExists = movieDetails?.some(
-          (detail) => detail.id === movieId
+    // fetch(
+    //   `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+    //   options
+    // )
+    //   .then((response) => response.json())
+    //   .then((movieDetailsObj) => {
+    //     // Check if the movie is already in movieDetails
+    //     const movieExists = movieDetails?.some(
+    //       (detail) => detail.id === movieId
+    //     );
+    //     if (!movieExists) {
+    //       setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+    //     }
+    //   })
+    //   .catch((error) => console.log(error));
+
+    async function fetchDetails() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+          options
         );
-        if (!movieExists) {
-          setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        if (response.ok) {
+          const movieDetailsObj = await response.json();
+          const movieExists = await movieDetails?.some(
+            (detail) => detail.id === movieId
+          );
+          if (!movieExists) {
+            setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+          }
+          return movieDetailsObj;
         }
-      })
-      .catch((error) => console.log(error));
+        throw new Error("Something went wrong");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchDetails();
 
     // Funktion, die bei einer Größenänderung des Fensters aufgerufen wird
     const handleResize = () => {
