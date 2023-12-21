@@ -6,7 +6,19 @@ import { MovieContext } from "../Context/MovieContext";
 import LoginSignUp from "../LoginSignUp/LoginSignUp";
 import { Link } from "react-router-dom";
 const Intro = () => {
-  const { toSignIn, setToSignIn } = useContext(MovieContext);
+  const {
+    toSignIn,
+    setToSignIn,
+    hasAnimationPlayed,
+    setHasAnimationPlayed,
+    setIsNavigatingFromIntro,
+  } = useContext(MovieContext);
+
+  const handleGetStartedClick = () => {
+    setHasAnimationPlayed(true);
+    setIsNavigatingFromIntro(true);
+    setToSignIn(true);
+  };
 
   useEffect(() => {}, [toSignIn]);
   console.log(toSignIn);
@@ -28,8 +40,8 @@ const Intro = () => {
           </p>
           <Link
             to="/login"
-            className="login-button"
-            onClick={() => setToSignIn(true)}
+            className="login-button "
+            onClick={handleGetStartedClick}
           >
             Get Started
           </Link>

@@ -17,6 +17,7 @@ import { useState } from "react";
 import Trailer from "./components/Trailer/Trailer";
 import Intro from "./components/Intro/Intro";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
+import Registration from "./components/Registration/Registration";
 
 function App() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -40,6 +41,7 @@ function App() {
           <Route path="/trailer/:id" element={<Trailer />} />
           <Route path="/intro" element={<Intro />} />
           <Route path="/login" element={<LoginSignUp />} />
+          <Route path="/registration" element={<Registration />} />
         </Routes>
         {/* <Footer /> */}
       </MovieContextProvider>
