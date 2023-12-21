@@ -59,7 +59,6 @@ const Home = (onAllResultsChange) => {
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
   return (
-
     <>
       {displaySplash ? (
         <Splash />
@@ -68,7 +67,7 @@ const Home = (onAllResultsChange) => {
       ) : (
         <main className="main-home">
           <div>Welcome!</div>
-              <DarkMode />
+          <DarkMode />
           <Searchbar />
           <div className="heading-slider">
             <h1>Trending Movies</h1>
