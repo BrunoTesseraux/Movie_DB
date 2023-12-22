@@ -25,6 +25,13 @@ const Favoriten = () => {
     setFavorites(updatedFavorites);
   };
 
+  // Entferne doppelte Filme aus der Favoritenliste
+  const uniqueFavorites = favorites.filter(
+    (film, index) =>
+      index ===
+      favorites.findIndex((favFilm) => favFilm.id === film.id)
+  );
+
   return (
     <div className="favoriten-container">
       <h2 className="favoriten-headline">Meine Favoriten</h2>
@@ -32,22 +39,24 @@ const Favoriten = () => {
         Hier findest du alle Filme, die du dir gespeichert hast.
       </p>
       <div className="favorites-list">
-        {favorites.map((movie, index) => (
-          <Link to={`/detail/${movie.id}`}>
-            <div key={index} className="favorite-item">
-              <img
-                className="poster"
-                src={`${imageURL}${movie.poster_path}`}
-                alt={`Bild des Films ${movie.title}`}
-              />
-              <button
-                className="favoriten-secondary-btn-text-only"
-                onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
-              >
-                <img src={binred} alt="" className="icon-bin" />
-              </button>
-            </div>
-          </Link>
+
+        {uniqueFavorites.map((movie, index) => (
+     <Link to={`/detail/${movie.id}`}>
+          <div key={index} className="favorite-item">
+            <img
+              className="poster"
+              src={`${imageURL}${movie.poster_path}`}
+              alt={`Bild des Films ${movie.title}`}
+            />
+            <button
+              className="favoriten-secondary-btn-text-only"
+              onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
+            >
+              <img src={binred} alt="" className="icon-bin" />
+            </button>
+          </div>
+           </Link>
+
         ))}
       </div>
       <NavBar />
