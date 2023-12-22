@@ -10,6 +10,9 @@ import back from "./../../assets/icons/back.svg";
 import save from "./../../assets/icons/save.svg";
 import download from "./../../assets/icons/download.svg";
 import ButtonBack from "../Button/ButtonBack";
+import { favoritenDaten } from "../Favoriten/FavoritenDaten";
+import { downloadDaten } from "../Downloads/DownloadsDaten";
+import SliderNetflixStyle from "../Slider/SliderNetflixStyle";
 
 const Details = () => {
   //useContext from fetch
@@ -23,6 +26,8 @@ const Details = () => {
   const selectedMoviePath = useParams();
 
   const selectedMovieID = selectedMoviePath.id;
+
+  const similarAPI = `https://api.themoviedb.org/3/movie/${selectedMovieID}/similar?language=en-US&page=1`;
 
   const selectedMovieInfos = allMovies.filter((movie) => {
     return movie.id.toString() === selectedMovieID.toString();
@@ -92,6 +97,33 @@ const Details = () => {
     vote_average,
   } = movie;
 
+  const [isInFavorites, setIsInFavorites] = useState(
+    favoritenDaten.some((favMovie) => favMovie.id === selectedMovieID)
+  );
+  const [isInDownloads, setIsInDownloads] = useState(
+    downloadDaten.some((dowmMovie) => dowmMovie.id === selectedMovieID)
+  );
+
+  const handleAddToFavorites = () => {
+    if (isInFavorites) {
+      alert("Dieser Film befindet sich bereits in Ihren Favoriten.");
+    } else {
+      favoritenDaten.push(movie);
+      setIsInFavorites(true);
+      console.log("Film zu Favoriten hinzugefügt:", movie);
+    }
+  };
+
+  const handleAddToDownloads = () => {
+    if (isInDownloads) {
+      alert("Dieser Film befindet sich bereits in Ihren Downloads.");
+    } else {
+      downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
+      setIsInDownloads(true);
+      console.log("Film zu Downloads hinzugefügt:", movie);
+    }
+  };
+
   return (
     <>
       <section className="movie-details">
@@ -110,8 +142,18 @@ const Details = () => {
                 // onClick={() => window.scrollTo(0, 0)}
               />
               <div className="save-download-wrapper">
-                <ButtonIconOnly icon={save} />
-                <ButtonIconOnly icon={download} />
+                <button
+                  className="secondary-btn-icon-only"
+                  onClick={handleAddToFavorites}
+                >
+                  <img src={save} alt="" />
+                </button>
+                <button
+                  className="secondary-btn-icon-only"
+                  onClick={handleAddToDownloads}
+                >
+                  <img src={download} alt="" />
+                </button>
               </div>
             </div>
             <div className="key-infos">
@@ -170,6 +212,7 @@ const Details = () => {
               <Button icon={play} content="Watch now"></Button>
             </Link>
           </div>
+          <SliderNetflixStyle fetchUrl={similarAPI} />
         </article>
       </section>
     </>

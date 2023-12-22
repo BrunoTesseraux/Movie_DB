@@ -4,6 +4,14 @@ import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
+
+import Registration from "../Registration/Registration";
+import logored2 from "./../../assets/logos/logored2.svg";
+import bg from "./../../assets/images/bg.avif";
+
+import logoblack from "./../../assets/logos/logoblack.svg";
+
+
 const LoginSignUp = () => {
   const {
     email,
@@ -18,8 +26,10 @@ const LoginSignUp = () => {
     isNavigatingFromIntro,
     setIsNavigatingFromIntro,
   } = useContext(MovieContext);
+  const [loginStatus, setLoginStatus] = useState(false);
 
   const navigate = useNavigate();
+  console.log(isLoggedIn);
 
   useEffect(() => {
     const usersFromLocalStorage = localStorage.getItem("users");
@@ -28,6 +38,7 @@ const LoginSignUp = () => {
     const isActiveValue = JSON.parse(isActiveValueFromLocalStorage);
     setUsers(parsedUserObj);
     setIsActive(isActiveValue);
+    console.log(users);
 
     if (isNavigatingFromIntro) {
       const timer = setTimeout(() => {
@@ -81,62 +92,67 @@ const LoginSignUp = () => {
   };
 
   return (
-    <section
-      className={`section-login ${isNavigatingFromIntro ? "animate" : ""}`}
-    >
-      <h1 className="text-logo">
-        Super <span>.Stream</span>
-      </h1>
-      <div className="registration-signin">
-        <Link
-          to="/login"
-          className={`login-headline ${isActive ? null : "form-active"}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Sign In
-        </Link>
-        <Link
-          to="/registration"
-          className={`registration-headline ${isActive ? "form-active" : null}`}
-          onClick={(e) => saveIsActiveValue(e)}
-        >
-          Registration
-        </Link>
-      </div>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="login-email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="login-password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input type="submit" value="Sign In" className="login-button" />
-
-        <div className="informations">
-          <label htmlFor="remember-me">
-            <input
-              type="checkbox"
-              name="remember-me"
-              id="remember-me"
-              className="remember-me"
-            />
-            Remember me
-          </label>
-          <span className="need-help">Need help?</span>
+    <section className="log-section-wrapper">
+      <img src={bg} alt="" className="log-background" />
+      <section
+        className={`log-section-login ${
+          isNavigatingFromIntro ? "animate" : ""
+        }`}
+      >
+        <img src={logoblack} alt="" className="login-logo" />
+        <div className="registration-signin">
+          <Link
+            to="/login"
+            className={`login-headline ${isActive ? null : "form-active"}`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/registration"
+            className={`registration-headline ${
+              isActive ? "form-active" : null
+            }`}
+            onClick={(e) => saveIsActiveValue(e)}
+          >
+            Registration
+          </Link>
         </div>
-      </form>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="login-email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            className="login-password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input type="submit" value="Sign In" className="login-button" />
+
+          <div className="informations">
+            <label htmlFor="remember-me" className="remember-me">
+              <input
+                type="checkbox"
+                name="remember-me"
+                id="remember-me"
+                className="remember-me"
+              />
+              Remember me
+            </label>
+            <span className="need-help">Need help?</span>
+          </div>
+        </form>
+      </section>
     </section>
   );
 };

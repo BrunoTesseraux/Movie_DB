@@ -3,6 +3,8 @@ import { downloadDaten } from "../Downloads/DownloadsDaten";
 import NavBar from "../NavBar/NavBar";
 import { MovieContext } from "../Context/MovieContext";
 import "./Downloads.scss";
+import binred from "./../../assets/icons/binred.svg";
+import { Link } from "react-router-dom";
 
 const Download = () => {
   const { config } = useContext(MovieContext);
@@ -24,22 +26,26 @@ const Download = () => {
 
   return (
     <div className="download-container">
-      <h2>Heruntergeladene Filme</h2>
+      <h2 className="downloads-headline">Meine heruntergeladenen Filme</h2>
+      <p className="download-introtext">
+        Hier findest du alle Filme, die du heruntergeladen hast.
+      </p>
       <div className="downloaded-movies-list">
         {downloadedMovies.map((movie, index) => (
           <div key={index} className="downloaded-movie-item">
             <img
-              className="Poster"
+              className="poster"
               src={`${imageURL}${movie.poster_path}`}
               alt={`Bild des Films ${movie.title}`}
             />
             <button
-              className="Button"
+              className="download-secondary-btn-text-only"
               onClick={() => removeFromDownloads(index)} // Aufruf der Funktion zum Entfernen
             >
-              Löschen
+              <img src={binred} alt="" className="icon-bin" />
             </button>
           </div>
+
         ))}
       </div>
       <NavBar />

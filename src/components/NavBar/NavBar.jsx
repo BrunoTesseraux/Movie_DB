@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import Searchbar from "../Searchbar/Searchbar";
 import "./NavBar.scss";
-import { Link } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
 import { MovieContext } from "../Context/MovieContext";
 
 const NavBar = () => {
   const { setGenreValue } = useContext(MovieContext);
+
+  const location = useLocation();
+
   return (
     <div className="NavBar ">
       <Link
@@ -15,22 +19,12 @@ const NavBar = () => {
       >
         <div className="imageContainer">
           <img
-            src="src/components/SVG/Ellipse 7.svg"
-            alt="#"
-            className="ellipseImage navImage"
-          />
-          <img
             src="src/components/SVG/Home.svg"
             alt="Home"
             className={`homeImage navImage ${
               location.pathname === "/home" ? "active" : ""
             }`}
           />
-          <span
-            className={`imageText ${location.pathname === "/" ? "active" : ""}`}
-          >
-            Home
-          </span>
         </div>
       </Link>
       <Link
