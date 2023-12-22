@@ -22,6 +22,20 @@ const Details = () => {
 
   const { genres } = useContext(MovieContext);
 
+  //Video
+  const [video, setVideo] = useState();
+  const [englishName, setEnglishName] = useState(true);
+
+  // open and close paragraph (read more/less)
+  const [openParagraph, setOpenParagraph] = useState(false);
+
+  const [isInFavorites, setIsInFavorites] = useState(
+    favoritenDaten.some((favMovie) => favMovie.id === selectedMovieID)
+  );
+  const [isInDownloads, setIsInDownloads] = useState(
+    downloadDaten.some((dowmMovie) => dowmMovie.id === selectedMovieID)
+  );
+
   //useParams and path for selected movie-data !old!
   const selectedMoviePath = useParams();
 
@@ -32,12 +46,6 @@ const Details = () => {
   const selectedMovieInfos = allMovies.filter((movie) => {
     return movie.id.toString() === selectedMovieID.toString();
   });
-
-  //Video
-  const [video, setVideo] = useState();
-
-  // open and close paragraph (read more/less)
-  const [openParagraph, setOpenParagraph] = useState(false);
 
   // Fetching environment variable for bearer token
   const bearerToken = import.meta.env
@@ -71,8 +79,6 @@ const Details = () => {
   //Array mit spoken languages
   const languages = movieDetails[0]?.spoken_languages;
 
-  const [englishName, setEnglishName] = useState(true);
-
   //Array mit genres aus film
   const thisMovieGenres = movieDetails[0]?.genres;
 
@@ -96,13 +102,6 @@ const Details = () => {
     runtime,
     vote_average,
   } = movie;
-
-  const [isInFavorites, setIsInFavorites] = useState(
-    favoritenDaten.some((favMovie) => favMovie.id === selectedMovieID)
-  );
-  const [isInDownloads, setIsInDownloads] = useState(
-    downloadDaten.some((dowmMovie) => dowmMovie.id === selectedMovieID)
-  );
 
   const handleAddToFavorites = () => {
     if (isInFavorites) {
