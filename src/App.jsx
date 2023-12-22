@@ -32,11 +32,43 @@ function App() {
 
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Favoriten" element={<Favoriten />} />
-          <Route path="/Downloads" element={<Downloads />} />
-          <Route path="/Profile" element={<Profile />} />
-          {/* <Route path="/Profile" element={<Profilseite />} /> */}
+          <Route
+            path="/"
+            element={
+              <div>
+                <NavBar />
+                <Home />
+              </div>
+            }
+          />
+          <Route
+            path="/Favoriten"
+            element={
+              <div>
+                <NavBar />
+                <Favoriten />
+              </div>
+            }
+          />
+          <Route
+            path="/Downloads"
+            element={
+              <div>
+                <NavBar />
+                <Downloads />
+              </div>
+            }
+          />
+          <Route
+            path="/Profile"
+            element={
+              <div>
+                <NavBar />
+                <Profile />
+              </div>
+            }
+          />
+          {/* Andere Routen ohne NavBar */}
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/movies" element={<MovieList />} />
           <Route path="/trailer/:id" element={<Trailer />} />
@@ -52,7 +84,6 @@ function App() {
             element={<FilteredMovieList fetchUrl={trendingURL} />}
           />
         </Routes>
-        <NavBar />
         {/* <Footer /> */}
       </MovieContextProvider>
     </div>
