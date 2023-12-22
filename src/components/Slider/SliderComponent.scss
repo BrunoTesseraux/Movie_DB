@@ -86,9 +86,6 @@
         display: block;
         position: absolute;
         bottom: 15px;
-        @media (min-width: 768px) {
-          bottom: 5px;
-        }
       }
 
       p {

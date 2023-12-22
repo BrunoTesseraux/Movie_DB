@@ -4,6 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import { MovieContext } from "../Context/MovieContext";
 import "./Downloads.scss";
 import binred from "./../../assets/icons/binred.svg";
+import { Link } from "react-router-dom";
 
 const Download = () => {
   const { config } = useContext(MovieContext);
@@ -44,6 +45,7 @@ const Download = () => {
               <img src={binred} alt="" className="icon-bin" />
             </button>
           </div>
+
         ))}
       </div>
       <NavBar />

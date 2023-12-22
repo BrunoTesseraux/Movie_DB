@@ -28,22 +28,22 @@ const Home = (onAllResultsChange) => {
     setIsLoggedIn,
   } = useContext(MovieContext);
   // const [showSplash, setShowSplash] = useState(false);
-  console.log(isLoggedIn);
+
   useEffect(() => {
-    const isFirstVisit = localStorage.getItem("firstVisit") === null;
-    const loggedIn = localStorage.getItem("loggedIn") === null;
+    const isFirstVisit = localStorage.getItem("firstVisit");
+    const loggedIn = localStorage.getItem("loggedIn");
+
     console.log(loggedIn);
 
-    // console.log(loggedIn);
     if (isFirstVisit) {
       localStorage.setItem("firstVisit", "no");
       setShowSplash(true);
-      // Setzen Sie hier eine Verzögerung, um den Splash-Screen eine Weile anzuzeigen
+      // Verzögerung, um den Splash-Screen eine Weile anzuzeigen
       setTimeout(() => {
         setShowSplash(false);
-        // Warten Sie noch einmal die Dauer der Ausblend-Animation
+        // Warten auf die Dauer der Ausblend-Animation
         setTimeout(() => setDisplaySplash(false), 500); // Angenommene Dauer der Ausblend-Animation
-      }, 3000); // Zeit, bis die Ausblend-Animation beginnt
+      }, 2000); // Zeit, bis die Ausblend-Animation beginnt
     } else {
       setDisplaySplash(false);
     }
@@ -104,7 +104,6 @@ const Home = (onAllResultsChange) => {
           <SliderNetflixStyle fetchUrl={trendingURL} />
         </main>
       )}
-      {/* <LoginSignUp /> */}
     </>
   );
 };

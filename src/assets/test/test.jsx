@@ -34,8 +34,6 @@ const YourComponent = () => {
     fetchDataFromApi(pageIndex);
   }, [pageIndex]);
 
-  console.log(allMovies);
-
   return <></>;
 };
 
