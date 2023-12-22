@@ -27,7 +27,7 @@ const Download = () => {
     <div className="download-container">
       <h2 className="downloads-headline">Meine heruntergeladenen Filme</h2>
       <p className="download-introtext">
-        Hier findest du alle Filme, die du dir gespeichert hast.
+        Hier findest du alle Filme, die du heruntergeladen hast.
       </p>
       <div className="downloaded-movies-list">
         {downloadedMovies.map((movie, index) => (
@@ -38,10 +38,10 @@ const Download = () => {
               alt={`Bild des Films ${movie.title}`}
             />
             <button
-              className="Button"
+              className="download-secondary-btn-text-only"
               onClick={() => removeFromDownloads(index)} // Aufruf der Funktion zum Entfernen
             >
-              Löschen
+              <img src={binred} alt="" className="icon-bin" />
             </button>
           </div>
         ))}
