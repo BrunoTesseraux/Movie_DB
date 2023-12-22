@@ -4,6 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import { MovieContext } from "../Context/MovieContext";
 import "./Downloads.scss";
 import binred from "./../../assets/icons/binred.svg";
+import { Link } from "react-router-dom";
 
 const Download = () => {
   const { config } = useContext(MovieContext);
@@ -31,19 +32,21 @@ const Download = () => {
       </p>
       <div className="downloaded-movies-list">
         {downloadedMovies.map((movie, index) => (
-          <div key={index} className="downloaded-movie-item">
-            <img
-              className="poster"
-              src={`${imageURL}${movie.poster_path}`}
-              alt={`Bild des Films ${movie.title}`}
-            />
-            <button
-              className="Button"
-              onClick={() => removeFromDownloads(index)} // Aufruf der Funktion zum Entfernen
-            >
-              Löschen
-            </button>
-          </div>
+          <Link to={`/detail/${movie.id}`}>
+            <div key={index} className="downloaded-movie-item">
+              <img
+                className="poster"
+                src={`${imageURL}${movie.poster_path}`}
+                alt={`Bild des Films ${movie.title}`}
+              />
+              <button
+                className="Button"
+                onClick={() => removeFromDownloads(index)} // Aufruf der Funktion zum Entfernen
+              >
+                Löschen
+              </button>
+            </div>
+          </Link>
         ))}
       </div>
       <NavBar />

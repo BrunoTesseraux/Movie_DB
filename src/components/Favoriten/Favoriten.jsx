@@ -5,6 +5,7 @@ import { favoritenDaten } from "./FavoritenDaten";
 import { MovieContext } from "../Context/MovieContext";
 import binwhite from "./../../assets/icons/binwhite.svg";
 import binred from "./../../assets/icons/binred.svg";
+import { Link } from "react-router-dom";
 
 const Favoriten = () => {
   const { config } = useContext(MovieContext);
@@ -32,19 +33,21 @@ const Favoriten = () => {
       </p>
       <div className="favorites-list">
         {favorites.map((movie, index) => (
-          <div key={index} className="favorite-item">
-            <img
-              className="poster"
-              src={`${imageURL}${movie.poster_path}`}
-              alt={`Bild des Films ${movie.title}`}
-            />
-            <button
-              className="favoriten-secondary-btn-text-only"
-              onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
-            >
-              <img src={binred} alt="" className="icon-bin" />
-            </button>
-          </div>
+          <Link to={`/detail/${movie.id}`}>
+            <div key={index} className="favorite-item">
+              <img
+                className="poster"
+                src={`${imageURL}${movie.poster_path}`}
+                alt={`Bild des Films ${movie.title}`}
+              />
+              <button
+                className="favoriten-secondary-btn-text-only"
+                onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
+              >
+                <img src={binred} alt="" className="icon-bin" />
+              </button>
+            </div>
+          </Link>
         ))}
       </div>
       <NavBar />
