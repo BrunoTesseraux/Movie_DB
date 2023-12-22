@@ -13,6 +13,8 @@ const MovieContextProvider = ({ children }) => {
   const [showSplash, setShowSplash] = useState(false);
   const [displaySplash, setDisplaySplash] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
   const [toSignIn, setToSignIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,6 +65,8 @@ const MovieContextProvider = ({ children }) => {
         setToSignIn,
         isActive,
         setIsActive,
+        loggedInUser,
+        setLoggedInUser,
         firstname,
         setFirstname,
         lastname,

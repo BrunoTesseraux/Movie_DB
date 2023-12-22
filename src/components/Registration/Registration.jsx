@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Registration.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import { useNavigate } from "react-router-dom";
-import logored2 from "./../../assets/logos/logored2.svg";
-import bg from "./../../assets/images/bg.avif";
 import logoblack from "./../../assets/logos/logoblack.svg";
+import bg from "./../../assets/images/bg.avif";
 
 const Registration = () => {
   const {
@@ -29,23 +28,23 @@ const Registration = () => {
     setBirthdate,
     users,
     setUsers,
+    isLoggedIn,
     setIsLoggedIn,
     isActive,
     setIsActive,
   } = useContext(MovieContext);
-  // const [loginStatus, setLoginStatus] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const usersFromLocalStorage = localStorage.getItem("users") || "[]"; // Default-Wert, falls nichts im LocalStorage ist
+    const usersFromLocalStorage = localStorage.getItem("users") || "[]";
     const parsedUserObj = JSON.parse(usersFromLocalStorage);
     setUsers(parsedUserObj);
 
     const isActiveValueFromLocalStorage = localStorage.getItem("isActive");
     const isActiveValue = isActiveValueFromLocalStorage
       ? JSON.parse(isActiveValueFromLocalStorage)
-      : false; // Default false
+      : false;
     setIsActive(isActiveValue);
   }, [email, password, setIsLoggedIn, isActive, setIsActive, setUsers]);
 

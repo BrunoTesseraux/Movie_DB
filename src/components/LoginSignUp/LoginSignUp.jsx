@@ -2,14 +2,9 @@ import { Link } from "react-router-dom";
 import "./LoginSignUp.scss";
 import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
-import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
-
-import Registration from "../Registration/Registration";
-import logored2 from "./../../assets/logos/logored2.svg";
-import bg from "./../../assets/images/bg.avif";
-
 import logoblack from "./../../assets/logos/logoblack.svg";
+import bg from "./../../assets/images/bg.avif";
 
 const LoginSignUp = () => {
   const {
@@ -19,13 +14,14 @@ const LoginSignUp = () => {
     setPassword,
     users,
     setUsers,
+    isLoggedIn,
     setIsLoggedIn,
     isActive,
     setIsActive,
+    hasAnimationPlayed,
     isNavigatingFromIntro,
     setIsNavigatingFromIntro,
   } = useContext(MovieContext);
-  const [loginStatus, setLoginStatus] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,7 +32,6 @@ const LoginSignUp = () => {
     const isActiveValue = JSON.parse(isActiveValueFromLocalStorage);
     setUsers(parsedUserObj);
     setIsActive(isActiveValue);
-    console.log(users);
 
     if (isNavigatingFromIntro) {
       const timer = setTimeout(() => {
@@ -54,6 +49,8 @@ const LoginSignUp = () => {
     setIsNavigatingFromIntro,
   ]);
 
+  var loggedInUser = "";
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -65,13 +62,28 @@ const LoginSignUp = () => {
     let isUserValid = false;
     for (const singleUser of users) {
       if (singleUser.email === email && singleUser.password === password) {
+        console.log(singleUser);
         isUserValid = true;
+        loggedInUser = {
+          username: singleUser.username,
+          email: singleUser.email,
+          address: singleUser.address,
+          birthdate: singleUser.birthdate,
+          firstname: singleUser.firstname,
+          lastname: singleUser.lastname,
+          password: singleUser.password,
+        };
+
         break;
       }
     }
 
+    setEmail("");
+    setPassword("");
+
     if (isUserValid) {
       localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       setIsLoggedIn(true);
       navigate("/");
     } else {
@@ -82,12 +94,17 @@ const LoginSignUp = () => {
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
+      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
       setIsActive(true);
+      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     }
   };
+
+  console.log(email);
+  console.log(password);
 
   return (
     <section className="log-section-wrapper">
