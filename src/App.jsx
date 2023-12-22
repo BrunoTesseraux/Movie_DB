@@ -18,11 +18,13 @@ import Intro from "./components/Intro/Intro";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 import Registration from "./components/Registration/Registration";
 import FilteredMovieList from "./components/FilteredMovieList/FilteredMovieList";
+import Profilseite from "./components/Profile/testprofil";
 
 function App() {
   const upcomingURL =
     "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
-
+  const trendingURL =
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
   return (
     <div>
       <MovieContextProvider>
@@ -34,6 +36,7 @@ function App() {
           <Route path="/Favoriten" element={<Favoriten />} />
           <Route path="/Downloads" element={<Downloads />} />
           <Route path="/Profile" element={<Profile />} />
+          {/* <Route path="/Profile" element={<Profilseite />} /> */}
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/movies" element={<MovieList />} />
           <Route path="/trailer/:id" element={<Trailer />} />
@@ -44,8 +47,12 @@ function App() {
             path="/allupcoming"
             element={<FilteredMovieList fetchUrl={upcomingURL} />}
           />
+          <Route
+            path="/alltrending"
+            element={<FilteredMovieList fetchUrl={trendingURL} />}
+          />
         </Routes>
-        <NavBar/>
+        <NavBar />
         {/* <Footer /> */}
       </MovieContextProvider>
     </div>

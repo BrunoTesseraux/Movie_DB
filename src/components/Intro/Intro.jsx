@@ -1,15 +1,13 @@
 import "./Intro.scss";
 import img1 from "../../assets/images/intro-img1.png";
 import img2 from "../../assets/images/intro-img2.png";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
-import LoginSignUp from "../LoginSignUp/LoginSignUp";
 import { Link } from "react-router-dom";
 const Intro = () => {
   const {
     toSignIn,
     setToSignIn,
-    hasAnimationPlayed,
     setHasAnimationPlayed,
     setIsNavigatingFromIntro,
     setIsActive,
@@ -20,14 +18,13 @@ const Intro = () => {
     setHasAnimationPlayed(true);
     setIsNavigatingFromIntro(true);
     setToSignIn(!isActive);
-    console.log(isActive);
     setIsActive(false);
 
     localStorage.setItem("isActive", false);
   };
 
   useEffect(() => {}, [toSignIn, setIsActive]);
-  console.log(toSignIn);
+
   return (
     <>
       <section className="section-intro">

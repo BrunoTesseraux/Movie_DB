@@ -3,6 +3,8 @@ import NavBar from "../NavBar/NavBar";
 import "./Favoriten.scss";
 import { favoritenDaten } from "./FavoritenDaten";
 import { MovieContext } from "../Context/MovieContext";
+import binwhite from "./../../assets/icons/binwhite.svg";
+import binred from "./../../assets/icons/binred.svg";
 
 const Favoriten = () => {
   const { config } = useContext(MovieContext);
@@ -24,20 +26,23 @@ const Favoriten = () => {
 
   return (
     <div className="favoriten-container">
-      <h2>Meine Favoriten</h2>
+      <h2 className="favoriten-headline">Meine Favoriten</h2>
+      <p className="favoriten-introtext">
+        Hier findest du alle Filme, die du dir gespeichert hast.
+      </p>
       <div className="favorites-list">
         {favorites.map((movie, index) => (
           <div key={index} className="favorite-item">
             <img
-              className="Poster"
+              className="poster"
               src={`${imageURL}${movie.poster_path}`}
               alt={`Bild des Films ${movie.title}`}
             />
             <button
-              className="Button"
+              className="favoriten-secondary-btn-text-only"
               onClick={() => removeFromFavorites(index)} // Aufruf der Funktion zum Entfernen
             >
-              Löschen
+              <img src={binred} alt="" className="icon-bin" />
             </button>
           </div>
         ))}

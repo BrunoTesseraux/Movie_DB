@@ -10,10 +10,12 @@ import ButtonIconOnly from "../Button/ButtonIconOnly";
 import save from "./../../assets/icons/save.svg";
 import savewhite from "./../../assets/icons/savewhite.svg";
 import download from "./../../assets/icons/download.svg";
+import downloadwhite from "./../../assets/icons/downloadwhite.svg";
 
 const MovieListItem = ({ movieId }) => {
   // useState for clicked button
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [buttonOneClicked, setButtonOneClicked] = useState(false);
+  const [buttonTwoClicked, setButtonTwoClicked] = useState(false);
 
   // Accessing context values
   const {
@@ -21,7 +23,7 @@ const MovieListItem = ({ movieId }) => {
     movieDetails,
     setMovieDetails,
     genreValue,
-    localSearchTerm,
+    searchTerm,
     innerWidth,
     setInnerWidth,
   } = useContext(MovieContext);
@@ -40,6 +42,10 @@ const MovieListItem = ({ movieId }) => {
 
   // Fetch movie details and add to context
   useEffect(() => {
+    const movieDetailsFromLocalStorag =
+      localStorage?.getItem("movieDetailsLocal");
+    const movieDetailsLocal = JSON.parse(movieDetailsFromLocalStorag);
+
     const options = {
       method: "GET",
       headers: {
@@ -48,21 +54,33 @@ const MovieListItem = ({ movieId }) => {
       },
     };
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((movieDetailsObj) => {
-        // Check if the movie is already in movieDetails
-        const movieExists = movieDetails?.some(
-          (detail) => detail.id === movieId
+    async function fetchDetails() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+          options
         );
-        if (!movieExists) {
-          setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        if (response.ok) {
+          const movieDetailsObj = await response.json();
+          localStorage.setItem(
+            "movieDetailsLocal",
+            JSON.stringify(movieDetailsObj)
+          );
+          const movieExists = await movieDetails.some(
+            (detail) => detail.id === movieId
+          );
+          if (!movieExists) {
+            setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+          }
+          return movieDetailsObj;
         }
-      })
-      .catch((error) => console.log(error));
+        throw new Error("Something went wrong");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchDetails();
 
     // Funktion, die bei einer Größenänderung des Fensters aufgerufen wird
     const handleResize = () => {
@@ -88,8 +106,8 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Checking if movie matches search term and selected genre
-  const titleMatchesSearchTerm = localSearchTerm
-    ? movie.title.toLowerCase().includes(localSearchTerm.toLowerCase())
+  const titleMatchesSearchTerm = searchTerm
+    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     : true;
   const genreMatches = genreValue
     ? movie.genres.some((genre) => genre.name === genreValue)
@@ -124,7 +142,7 @@ const MovieListItem = ({ movieId }) => {
     } else {
       favoritenDaten.push(movie);
       setIsInFavorites(true);
-      setButtonClicked(true);
+      setButtonOneClicked(true);
       console.log("Film zu Favoriten hinzugefügt:", movie);
     }
   };
@@ -135,7 +153,7 @@ const MovieListItem = ({ movieId }) => {
     } else {
       downloadDaten.push(movie); // Fügen Sie den Film zu den Downloads hinzu
       setIsInDownloads(true);
-      setButtonClicked(true);
+      setButtonTwoClicked(true);
       console.log("Film zu Downloads hinzugefügt:", movie);
     }
   };
@@ -191,19 +209,23 @@ const MovieListItem = ({ movieId }) => {
         <div className="movie-card-functions">
           <button
             className={
-              buttonClicked
+              buttonOneClicked
                 ? "secondary-btn-icon-only-clicked"
                 : "secondary-btn-icon-only"
             }
             onClick={handleAddToFavorites}
           >
-            <img src={buttonClicked ? savewhite : save} alt="" />
+            <img src={buttonOneClicked ? savewhite : save} alt="" />
           </button>
           <button
-            className="secondary-btn-icon-only"
+            className={
+              buttonTwoClicked
+                ? "secondary-btn-icon-only-clicked"
+                : "secondary-btn-icon-only"
+            }
             onClick={handleAddToDownloads}
           >
-            <img src={download} alt="" />
+            <img src={buttonTwoClicked ? downloadwhite : download} alt="" />
           </button>
         </div>
       </div>

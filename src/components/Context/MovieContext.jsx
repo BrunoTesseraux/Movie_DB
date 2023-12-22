@@ -20,9 +20,15 @@ const MovieContextProvider = ({ children }) => {
   const [lastname, setLastname] = useState("");
   const [users, setUsers] = useState([]);
   const [isActive, setIsActive] = useState(false);
+  const [street, setStreet] = useState("");
+  const [houseNumber, setHouseNumber] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
+  const [birthdate, setBirthdate] = useState("");
   const [hasAnimationPlayed, setHasAnimationPlayed] = useState(false);
   const [isNavigatingFromIntro, setIsNavigatingFromIntro] = useState(false);
-  const [localSearchTerm, setLocalSearchTerm] = useState("");
+  const [onLocation, setOnLocation] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <MovieContext.Provider
@@ -61,12 +67,24 @@ const MovieContextProvider = ({ children }) => {
         setFirstname,
         lastname,
         setLastname,
+        street,
+        setStreet,
+        houseNumber,
+        setHouseNumber,
+        postalCode,
+        setPostalCode,
+        country,
+        setCountry,
+        birthdate,
+        setBirthdate,
         hasAnimationPlayed,
         setHasAnimationPlayed,
         isNavigatingFromIntro,
         setIsNavigatingFromIntro,
-        localSearchTerm,
-        setLocalSearchTerm,
+        onLocation,
+        setOnLocation,
+        isSubmitting,
+        setIsSubmitting,
       }}
     >
       {children}

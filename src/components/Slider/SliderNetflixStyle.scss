@@ -1,8 +1,9 @@
 .carusel {
-  height: 300px;
+  // height: 300px;
   width: 80%;
   margin-inline: auto;
   position: relative;
+  font-family: "Poppins-Rg";
 
   .switch-left,
   .switch-right {
@@ -16,14 +17,14 @@
   }
 
   .switch-right {
-    right: -50px;
+    right: -35px;
   }
 
   .switch-left {
-    left: -50px;
+    left: -35px;
   }
   .carusel-box {
-    height: 335px;
+    height: 340px;
     overflow: scroll;
     padding: 20px 0;
     white-space: nowrap;
@@ -66,6 +67,7 @@
     }
     h2 {
       font-size: 1rem;
+      font-family: "Poppins-Bd";
       width: 100%;
       @media (min-width: 1024px) {
         width: 147px;
@@ -86,7 +88,7 @@
         .rating_star {
           height: 1rem;
           width: 1rem;
-          padding-bottom: 2px;
+          padding-right: 4px;
         }
       }
     }
@@ -106,7 +108,7 @@
 }
 .slider-button {
   background: none;
-  height: 100%;
+  max-height: 100%;
   border: none;
   transition: 0.3s;
   border-radius: 15px;
