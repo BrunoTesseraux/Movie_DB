@@ -16,9 +16,8 @@
       max-width: 200px;
       overflow: hidden;
       display: flex;
-      box-shadow: 2px 4px 10px #00000025;
       transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
+      box-shadow: 2px 4px 10px #00000025;
       .movie-card-img {
         max-width: 100%;
         object-fit: contain;
@@ -48,7 +47,6 @@
         text-decoration: none;
         font-family: "Poppins-Bd";
         font-size: 1.125rem;
-        color: #000;
         max-width: 80%;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -65,7 +63,6 @@
         .movie-card-release_date {
           font-family: "Poppins-Rg";
 
-          color: #000;
           line-height: 24px;
           display: flex;
         }
@@ -78,14 +75,12 @@
         .movie-card-rating {
           font-family: "Poppins-Bd";
 
-          color: #000;
           line-height: 24px;
         }
 
         .movie-card-runtime {
           font-family: "Poppins-Rg";
           line-height: 24px;
-          color: #000;
         }
 
         // .movie-card-genre::after {
@@ -94,12 +89,10 @@
         .dot {
           font-size: 8px;
           margin-inline: 3%;
-          color: #000;
         }
       }
       .movie-card-genre {
         font-family: "Poppins-Rg";
-        color: #000;
       }
     }
     .movie-card-functions {
@@ -122,7 +115,6 @@
     flex-direction: column;
     row-gap: 0rem;
     column-gap: 1.25rem;
-    background-color: #fff;
     border-radius: 0.4rem;
     box-shadow: 2px 4px 10px #00000025;
 
@@ -147,9 +139,40 @@
     flex-direction: column;
     row-gap: 0rem;
     column-gap: 1.25rem;
-    background-color: #fff;
     border-radius: 0.4rem;
-    box-shadow: 2px 4px 10px #00000025;
+  }
+}
+
+.light {
+  .movie-card {
+    .movie-card-release_date,
+    .movie-card-runtime,
+    .dot,
+    .movie-card-headline,
+    .movie-card-genre,
+    .movie-card-rating {
+      color: black;
+    }
+    @media (min-width: 580px) {
+      background-color: #ffffff;
+      box-shadow: 2px 4px 10px #00000025;
+    }
+  }
+}
+.dark {
+  .movie-card {
+    .movie-card-release_date,
+    .movie-card-runtime,
+    .dot,
+    .movie-card-headline,
+    .movie-card-genre,
+    .movie-card-rating {
+      color: white;
+    }
+    @media (min-width: 580px) {
+      background-color: #1b1b1b;
+      box-shadow: 0 0 8px #ffffff80;
+    }
   }
 }
 
@@ -159,9 +182,7 @@
     flex-direction: column;
     row-gap: 0rem;
     column-gap: 1.25rem;
-    background-color: #fff;
     border-radius: 0.4rem;
-    box-shadow: 2px 4px 10px #00000025;
 
     .link {
       .image-wrapper {

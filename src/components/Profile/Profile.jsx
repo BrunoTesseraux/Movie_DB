@@ -50,11 +50,12 @@ const Profile = () => {
   return (
     <>
       <div className="profile-container">
+        <div className="top-bild"></div>
         <DarkMode />
-        <div className="profile-header">
-          <h1>Profil</h1>
-        </div>
         <div className="profile-content">
+          <div className="profile-header">
+            <h1>Profil</h1>
+          </div>
           <div className="profile-picture">
             <img src="src\components\SVG\mac mussterman.jpg" alt="Profilbild" />
           </div>
