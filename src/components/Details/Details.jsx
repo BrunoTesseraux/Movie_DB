@@ -15,6 +15,8 @@ import { downloadDaten } from "../Downloads/DownloadsDaten";
 import SliderNetflixStyle from "../Slider/SliderNetflixStyle";
 
 const Details = () => {
+  const currentTheme = localStorage.getItem("theme");
+
   //useContext from fetch
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
 
@@ -103,6 +105,8 @@ const Details = () => {
     vote_average,
   } = movie;
 
+  console.log(movie);
+
   const handleAddToFavorites = () => {
     if (isInFavorites) {
       alert("Dieser Film befindet sich bereits in Ihren Favoriten.");
@@ -125,7 +129,7 @@ const Details = () => {
 
   return (
     <>
-      <section className="movie-details">
+      <section className={`movie-details`}>
         <article className="movie-details" key={id}>
           <div className="movie-details-top">
             <img
@@ -133,8 +137,16 @@ const Details = () => {
               alt=""
               className="backdrop"
             />
-            <p className="movie-details-headline">Movie Details</p>
-            <h2>{title}</h2>
+            <p
+              className={`movie-details-headline ${
+                currentTheme === "dark" ? "dark" : "light"
+              }`}
+            >
+              Movie Details
+            </p>
+            <h2 className={`${currentTheme === "dark" ? "dark" : "light"}`}>
+              {title}
+            </h2>
             <div className="features">
               <ButtonBack
                 icon={back}
@@ -155,21 +167,29 @@ const Details = () => {
                 </button>
               </div>
             </div>
-            <div className="key-infos">
+            <div
+              className={`key-infos ${
+                currentTheme === "dark" ? "dark" : "light"
+              }`}
+            >
               <ul>
                 <p>
                   <img src={rating} alt="" /> {vote_average}
                 </p>
                 <li>{release_date}</li>
 
-                <li>{genres[0]?.name}</li>
+                {/* <li>{genres[0]?.name}</li> */}
                 <li>
                   {Math.floor(runtime / 60)} h {runtime % 60} min
                 </li>
               </ul>
             </div>
           </div>
-          <div className={"movie-details-bottom"}>
+          <div
+            className={`movie-details-bottom ${
+              currentTheme === "dark" ? "dark" : "light"
+            }`}
+          >
             <h3>Overview</h3>
             <div>
               <p

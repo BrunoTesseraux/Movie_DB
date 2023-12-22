@@ -36,7 +36,7 @@ const SliderComponent = ({ fetchUrl }) => {
 
     const intervalId = setInterval(() => {
       goToNext();
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, [fetchUrl, currentIndex]);
