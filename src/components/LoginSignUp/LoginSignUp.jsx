@@ -2,11 +2,15 @@ import { Link } from "react-router-dom";
 import "./LoginSignUp.scss";
 import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
+import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
 
 import Registration from "../Registration/Registration";
 import logored2 from "./../../assets/logos/logored2.svg";
 import bg from "./../../assets/images/bg.avif";
+
+import logoblack from "./../../assets/logos/logoblack.svg";
+
 
 const LoginSignUp = () => {
   const {
@@ -22,8 +26,10 @@ const LoginSignUp = () => {
     isNavigatingFromIntro,
     setIsNavigatingFromIntro,
   } = useContext(MovieContext);
+  const [loginStatus, setLoginStatus] = useState(false);
 
   const navigate = useNavigate();
+  console.log(isLoggedIn);
 
   useEffect(() => {
     const usersFromLocalStorage = localStorage.getItem("users");
@@ -32,6 +38,7 @@ const LoginSignUp = () => {
     const isActiveValue = JSON.parse(isActiveValueFromLocalStorage);
     setUsers(parsedUserObj);
     setIsActive(isActiveValue);
+    console.log(users);
 
     if (isNavigatingFromIntro) {
       const timer = setTimeout(() => {
@@ -58,19 +65,15 @@ const LoginSignUp = () => {
     }
 
     let isUserValid = false;
-    let loggedInUser = null;
-
     for (const singleUser of users) {
       if (singleUser.email === email && singleUser.password === password) {
         isUserValid = true;
-        loggedInUser = singleUser; // Hier das gesamte Benutzerobjekt speichern
         break;
       }
     }
 
     if (isUserValid) {
       localStorage.setItem("loggedIn", "true");
-      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       setIsLoggedIn(true);
       navigate("/");
     } else {
@@ -89,13 +92,14 @@ const LoginSignUp = () => {
   };
 
   return (
-    <section className="section-wrapper">
-      <img src={bg} alt="" className="background" />
+    <section className="log-section-wrapper">
+      <img src={bg} alt="" className="log-background" />
       <section
-        className={`section-login ${isNavigatingFromIntro ? "animate" : ""}`}
+        className={`log-section-login ${
+          isNavigatingFromIntro ? "animate" : ""
+        }`}
       >
-        <img src={logored2} alt="" className="login-logo" />
-
+        <img src={logoblack} alt="" className="login-logo" />
         <div className="registration-signin">
           <Link
             to="/login"
