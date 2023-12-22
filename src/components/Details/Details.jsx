@@ -14,25 +14,19 @@ import ButtonBack from "../Button/ButtonBack";
 const Details = () => {
   //useContext from fetch
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
-  // console.log(allMovies);
 
   const { config } = useContext(MovieContext);
-  // console.log(config);
 
   const { genres } = useContext(MovieContext);
-  // console.log(genres);
 
   //useParams and path for selected movie-data !old!
   const selectedMoviePath = useParams();
-  // console.log(selectedMoviePath);
 
   const selectedMovieID = selectedMoviePath.id;
-  // console.log(selectedMovieID);
 
   const selectedMovieInfos = allMovies.filter((movie) => {
     return movie.id.toString() === selectedMovieID.toString();
   });
-  // console.log(selectedMovieInfos);
 
   //Video
   const [video, setVideo] = useState();
@@ -71,13 +65,11 @@ const Details = () => {
 
   //Array mit spoken languages
   const languages = movieDetails[0]?.spoken_languages;
-  // console.log(languages);
 
   const [englishName, setEnglishName] = useState(true);
 
   //Array mit genres aus film
   const thisMovieGenres = movieDetails[0]?.genres;
-  console.log(thisMovieGenres);
 
   let movie = movieDetails?.find(
     (detail) => detail?.id.toString() === selectedMovieID

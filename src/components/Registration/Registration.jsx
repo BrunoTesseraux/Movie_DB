@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Registration.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
-import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
@@ -17,7 +16,6 @@ const Registration = () => {
     setLastname,
     users,
     setUsers,
-    isLoggedIn,
     setIsLoggedIn,
     isActive,
     setIsActive,
@@ -25,7 +23,6 @@ const Registration = () => {
   // const [loginStatus, setLoginStatus] = useState(true);
 
   const navigate = useNavigate();
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const usersFromLocalStorage = localStorage.getItem("users") || "[]"; // Default-Wert, falls nichts im LocalStorage ist
@@ -48,7 +45,6 @@ const Registration = () => {
     setUsers(allUsers);
     localStorage.setItem("users", JSON.stringify(allUsers));
     setIsActive(false);
-    console.log(isActive);
     localStorage.setItem("isActive", false);
     setFirstname("");
     setLastname("");
@@ -60,10 +56,8 @@ const Registration = () => {
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
-      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
-      console.log(isActive);
       setIsActive(true);
       localStorage.setItem("isActive", !isActive);
     }

@@ -2,8 +2,7 @@ import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 const FetchMovies = () => {
-  const { setAllMovies, setConfig, setGenres, setMovieDetails, movieId } =
-    useContext(MovieContext);
+  const { setAllMovies, setConfig, setGenres } = useContext(MovieContext);
 
   const options = {
     method: "GET",
@@ -18,21 +17,6 @@ const FetchMovies = () => {
     let newMovies = []; // Temporary array for the collected films
 
     async function fetchMovies(pageIndex) {
-      //   fetch(
-      //     `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
-      //     options
-      //   )
-      //     .then((response) => response.json())
-      //     .then((moviesData) => {
-      //       newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
-      //       // get 5 pages from the api -> One Page have 20 Objects in an Array
-      //       if (pageIndex === 10) {
-      //         setAllMovies(newMovies); // set the state on the end of the bottom for loop
-      //       }
-      //     })
-      //     .catch((error) => console.log(error));
-      // };
-
       try {
         const response = await fetch(
           `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
@@ -78,7 +62,7 @@ const FetchMovies = () => {
     fetchGenre();
   }, []);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default FetchMovies;

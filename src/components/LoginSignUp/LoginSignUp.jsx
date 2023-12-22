@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import "./LoginSignUp.scss";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
-import Registration from "../Registration/Registration";
 const LoginSignUp = () => {
   const {
     email,
@@ -13,18 +12,14 @@ const LoginSignUp = () => {
     setPassword,
     users,
     setUsers,
-    isLoggedIn,
     setIsLoggedIn,
     isActive,
     setIsActive,
-    hasAnimationPlayed,
     isNavigatingFromIntro,
     setIsNavigatingFromIntro,
   } = useContext(MovieContext);
-  const [loginStatus, setLoginStatus] = useState(false);
 
   const navigate = useNavigate();
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const usersFromLocalStorage = localStorage.getItem("users");
@@ -33,7 +28,6 @@ const LoginSignUp = () => {
     const isActiveValue = JSON.parse(isActiveValueFromLocalStorage);
     setUsers(parsedUserObj);
     setIsActive(isActiveValue);
-    console.log(users);
 
     if (isNavigatingFromIntro) {
       const timer = setTimeout(() => {
@@ -62,14 +56,10 @@ const LoginSignUp = () => {
     let isUserValid = false;
     for (const singleUser of users) {
       if (singleUser.email === email && singleUser.password === password) {
-        console.log(singleUser);
         isUserValid = true;
         break;
       }
     }
-
-    setEmail("");
-    setPassword("");
 
     if (isUserValid) {
       localStorage.setItem("loggedIn", "true");
@@ -83,17 +73,13 @@ const LoginSignUp = () => {
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
-      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
       setIsActive(true);
-      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     }
   };
 
-  console.log(email);
-  console.log(password);
   return (
     <section
       className={`section-login ${isNavigatingFromIntro ? "animate" : ""}`}

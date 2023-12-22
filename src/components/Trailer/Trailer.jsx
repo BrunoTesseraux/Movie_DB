@@ -7,7 +7,6 @@ import { MovieContext } from "../Context/MovieContext";
 
 const Trailer = () => {
   const { id: selectedMoviePath } = useParams();
-  console.log(selectedMoviePath);
 
   const selectedMovieID = selectedMoviePath.id;
   // console.log(selectedMovieID);
@@ -35,7 +34,6 @@ const Trailer = () => {
     )
       .then((response) => response.json())
       .then((movieTrailerObj) => {
-        console.log(movieTrailerObj);
         // Updating movie details in context
         return setVideo((prevDetails) => [...prevDetails, movieTrailerObj]);
       })
@@ -48,14 +46,11 @@ const Trailer = () => {
         singleVideo.type.toLowerCase() === "trailer" && singleVideo.official
     ) || video[0]?.results[0];
 
-  console.log(trailer);
-
   if (!trailer) {
     return <div>Lade Trailer...</div>;
   }
 
   const { key: youtubeTrailerKey } = trailer;
-  console.log(youtubeTrailerKey);
 
   return (
     <>

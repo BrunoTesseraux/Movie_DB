@@ -1,12 +1,17 @@
+import { useContext } from "react";
+import Searchbar from "../Searchbar/Searchbar";
 import "./NavBar.scss";
 import { Link } from "react-router-dom";
+import { MovieContext } from "../Context/MovieContext";
 
 const NavBar = () => {
+  const { setGenreValue } = useContext(MovieContext);
   return (
     <div className="NavBar ">
       <Link
         to="/"
         className={`navLink ${location.pathname === "/" ? "active" : ""}`}
+        onClick={() => <Searchbar /> && setGenreValue("")}
       >
         <div className="imageContainer">
           <img

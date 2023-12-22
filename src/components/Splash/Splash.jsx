@@ -4,10 +4,9 @@ import { MovieContext } from "../Context/MovieContext";
 
 const Splash = () => {
   const { showSplash } = useContext(MovieContext);
-  console.log(showSplash);
 
   useEffect(() => {}, [showSplash]);
-  console.log(showSplash);
+
   return (
     <section
       className={`spash-screen ${

@@ -21,7 +21,7 @@ const MovieListItem = ({ movieId }) => {
     movieDetails,
     setMovieDetails,
     genreValue,
-    localSearchTerm,
+    searchTerm,
     innerWidth,
     setInnerWidth,
   } = useContext(MovieContext);
@@ -48,22 +48,6 @@ const MovieListItem = ({ movieId }) => {
       },
     };
 
-    // fetch(
-    //   `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-    //   options
-    // )
-    //   .then((response) => response.json())
-    //   .then((movieDetailsObj) => {
-    //     // Check if the movie is already in movieDetails
-    //     const movieExists = movieDetails?.some(
-    //       (detail) => detail.id === movieId
-    //     );
-    //     if (!movieExists) {
-    //       setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
-
     async function fetchDetails() {
       try {
         const response = await fetch(
@@ -72,7 +56,7 @@ const MovieListItem = ({ movieId }) => {
         );
         if (response.ok) {
           const movieDetailsObj = await response.json();
-          const movieExists = await movieDetails?.some(
+          const movieExists = await movieDetails.some(
             (detail) => detail.id === movieId
           );
           if (!movieExists) {
@@ -112,8 +96,8 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Checking if movie matches search term and selected genre
-  const titleMatchesSearchTerm = localSearchTerm
-    ? movie.title.toLowerCase().includes(localSearchTerm.toLowerCase())
+  const titleMatchesSearchTerm = searchTerm
+    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     : true;
   const genreMatches = genreValue
     ? movie.genres.some((genre) => genre.name === genreValue)
