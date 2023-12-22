@@ -26,8 +26,9 @@ const FetchMovies = () => {
           const moviesData = await response.json();
           newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
           // get 5 pages from the api -> One Page have 20 Objects in an Array
-          if (pageIndex === 10) {
+          if (pageIndex === 30) {
             await setAllMovies(newMovies); // set the state on the end of the bottom for loop
+            localStorage.setItem("allMoviesLocal", JSON.stringify(newMovies));
           }
           return newMovies;
         }
@@ -37,7 +38,7 @@ const FetchMovies = () => {
       }
     }
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 30; i++) {
       fetchMovies(i);
     }
   }, []);
