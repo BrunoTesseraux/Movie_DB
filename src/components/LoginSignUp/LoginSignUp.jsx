@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./LoginSignUp.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import Home from "../../page/Home";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,6 @@ import logored2 from "./../../assets/logos/logored2.svg";
 import bg from "./../../assets/images/bg.avif";
 
 import logoblack from "./../../assets/logos/logoblack.svg";
-
 
 const LoginSignUp = () => {
   const {
@@ -29,7 +28,6 @@ const LoginSignUp = () => {
   const [loginStatus, setLoginStatus] = useState(false);
 
   const navigate = useNavigate();
-  console.log(isLoggedIn);
 
   useEffect(() => {
     const usersFromLocalStorage = localStorage.getItem("users");
