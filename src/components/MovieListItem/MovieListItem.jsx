@@ -40,10 +40,6 @@ const MovieListItem = ({ movieId }) => {
 
   // Fetch movie details and add to context
   useEffect(() => {
-    const movieDetailsFromLocalStorag =
-      localStorage?.getItem("movieDetailsLocal");
-    const movieDetailsLocal = JSON.parse(movieDetailsFromLocalStorag);
-
     const options = {
       method: "GET",
       headers: {
@@ -60,10 +56,6 @@ const MovieListItem = ({ movieId }) => {
         );
         if (response.ok) {
           const movieDetailsObj = await response.json();
-          localStorage.setItem(
-            "movieDetailsLocal",
-            JSON.stringify(movieDetailsObj)
-          );
           const movieExists = await movieDetails.some(
             (detail) => detail.id === movieId
           );
