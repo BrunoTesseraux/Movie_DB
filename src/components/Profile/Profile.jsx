@@ -49,8 +49,8 @@ const Profile = () => {
 
   return (
     <>
-      <DarkMode />
       <div className="profile-container">
+        <DarkMode />
         <div className="profile-header">
           <h1>Profil</h1>
         </div>
