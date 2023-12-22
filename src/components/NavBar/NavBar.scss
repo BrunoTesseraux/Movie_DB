@@ -1,7 +1,7 @@
 
 @media (min-width: 390px) {
   .NavBar {
-    background-color: rgba(255, 255, 255, 0.857);
+    background-color: rgba(255, 255, 255, 0.534);
     backdrop-filter: blur(10px);
     position: fixed;
     bottom: 0;
@@ -57,7 +57,7 @@
 
 @media (min-width: 1024px){
   .NavBar {
-    background-color: rgba(255, 255, 255, 0.857);
+    background-color: rgba(255, 255, 255, 0.534);
     backdrop-filter: blur(10px);
     position: fixed;
     bottom: 0;
@@ -117,7 +117,7 @@
 
 @media (min-width: 1440px){
   .NavBar {
-    background-color: rgba(255, 255, 255, 0.857);
+    background-color: rgba(255, 255, 255, 0.534);
     backdrop-filter: blur(10px);
     position: fixed;
     bottom: 0;
@@ -172,4 +172,11 @@
         brightness(101%) contrast(94%);
     }
   }
-}
+
+  }
+
+  .dark{
+    .NavBar{
+      background-color: rgba(0, 0, 0, 0.236);
+    }
+  }
