@@ -23,7 +23,7 @@ const MovieListItem = ({ movieId }) => {
     movieDetails,
     setMovieDetails,
     genreValue,
-    localSearchTerm,
+    searchTerm,
     innerWidth,
     setInnerWidth,
   } = useContext(MovieContext);
@@ -42,6 +42,10 @@ const MovieListItem = ({ movieId }) => {
 
   // Fetch movie details and add to context
   useEffect(() => {
+    const movieDetailsFromLocalStorag =
+      localStorage?.getItem("movieDetailsLocal");
+    const movieDetailsLocal = JSON.parse(movieDetailsFromLocalStorag);
+
     const options = {
       method: "GET",
       headers: {
@@ -50,21 +54,33 @@ const MovieListItem = ({ movieId }) => {
       },
     };
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((movieDetailsObj) => {
-        // Check if the movie is already in movieDetails
-        const movieExists = movieDetails?.some(
-          (detail) => detail.id === movieId
+    async function fetchDetails() {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+          options
         );
-        if (!movieExists) {
-          setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+        if (response.ok) {
+          const movieDetailsObj = await response.json();
+          localStorage.setItem(
+            "movieDetailsLocal",
+            JSON.stringify(movieDetailsObj)
+          );
+          const movieExists = await movieDetails.some(
+            (detail) => detail.id === movieId
+          );
+          if (!movieExists) {
+            setMovieDetails((prevDetails) => [...prevDetails, movieDetailsObj]);
+          }
+          return movieDetailsObj;
         }
-      })
-      .catch((error) => console.log(error));
+        throw new Error("Something went wrong");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchDetails();
 
     // Funktion, die bei einer Größenänderung des Fensters aufgerufen wird
     const handleResize = () => {
@@ -90,8 +106,8 @@ const MovieListItem = ({ movieId }) => {
   }
 
   // Checking if movie matches search term and selected genre
-  const titleMatchesSearchTerm = localSearchTerm
-    ? movie.title.toLowerCase().includes(localSearchTerm.toLowerCase())
+  const titleMatchesSearchTerm = searchTerm
+    ? movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     : true;
   const genreMatches = genreValue
     ? movie.genres.some((genre) => genre.name === genreValue)

@@ -2,8 +2,7 @@ import { useContext, useEffect } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 const FetchMovies = () => {
-  const { setAllMovies, setConfig, setGenres, setMovieDetails, movieId } =
-    useContext(MovieContext);
+  const { setAllMovies, setConfig, setGenres } = useContext(MovieContext);
 
   const options = {
     method: "GET",
@@ -17,23 +16,29 @@ const FetchMovies = () => {
   useEffect(() => {
     let newMovies = []; // Temporary array for the collected films
 
-    const fetchMovies = (pageIndex) => {
-      fetch(
-        `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
-        options
-      )
-        .then((response) => response.json())
-        .then((moviesData) => {
+    async function fetchMovies(pageIndex) {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?page=${pageIndex}&language=en`,
+          options
+        );
+        if (response.ok) {
+          const moviesData = await response.json();
           newMovies = newMovies?.concat(moviesData.results); // concat movies to temporary array
           // get 5 pages from the api -> One Page have 20 Objects in an Array
-          if (pageIndex === 10) {
-            setAllMovies(newMovies); // set the state on the end of the bottom for loop
+          if (pageIndex === 30) {
+            await setAllMovies(newMovies); // set the state on the end of the bottom for loop
+            localStorage.setItem("allMoviesLocal", JSON.stringify(newMovies));
           }
-        })
-        .catch((error) => console.log(error));
-    };
+          return newMovies;
+        }
+        throw new Error("Something went wrong");
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 30; i++) {
       fetchMovies(i);
     }
   }, []);
@@ -58,7 +63,7 @@ const FetchMovies = () => {
     fetchGenre();
   }, []);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default FetchMovies;

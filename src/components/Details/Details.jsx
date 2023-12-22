@@ -17,27 +17,21 @@ import SliderNetflixStyle from "../Slider/SliderNetflixStyle";
 const Details = () => {
   //useContext from fetch
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
-  // console.log(allMovies);
 
   const { config } = useContext(MovieContext);
-  // console.log(config);
 
   const { genres } = useContext(MovieContext);
-  // console.log(genres);
 
   //useParams and path for selected movie-data !old!
   const selectedMoviePath = useParams();
-  // console.log(selectedMoviePath);
 
   const selectedMovieID = selectedMoviePath.id;
-  // console.log(selectedMovieID);
 
   const similarAPI = `https://api.themoviedb.org/3/movie/${selectedMovieID}/similar?language=en-US&page=1`;
 
   const selectedMovieInfos = allMovies.filter((movie) => {
     return movie.id.toString() === selectedMovieID.toString();
   });
-  // console.log(selectedMovieInfos);
 
   //Video
   const [video, setVideo] = useState();
@@ -74,17 +68,13 @@ const Details = () => {
     // };
   }, [selectedMovieID, setMovieDetails]);
 
-  console.log(movieDetails);
-
   //Array mit spoken languages
   const languages = movieDetails[0]?.spoken_languages;
-  console.log(languages);
 
   const [englishName, setEnglishName] = useState(true);
 
   //Array mit genres aus film
   const thisMovieGenres = movieDetails[0]?.genres;
-  console.log(thisMovieGenres);
 
   let movie = movieDetails?.find(
     (detail) => detail?.id.toString() === selectedMovieID
@@ -218,7 +208,7 @@ const Details = () => {
               </div>
             </div>
 
-            <Link to="/trailer/${props.id}" className="linkTo">
+            <Link to={`/trailer/${movie.id}`} className="linkTo">
               <Button icon={play} content="Watch now"></Button>
             </Link>
           </div>

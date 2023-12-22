@@ -6,14 +6,13 @@ import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 
 const Trailer = () => {
-  const selectedMoviePath = useParams();
-  console.log(selectedMoviePath);
+  const { id: selectedMoviePath } = useParams();
 
   const selectedMovieID = selectedMoviePath.id;
-  console.log(selectedMovieID);
+  // console.log(selectedMovieID);
 
   const { allMovies, movieDetails, setMovieDetails } = useContext(MovieContext);
-  console.log(allMovies);
+  // console.log(allMovies);
 
   const [video, setVideo] = useState([]);
 
@@ -28,21 +27,30 @@ const Trailer = () => {
         Authorization: `Bearer ${bearerToken}`,
       },
     };
+
     fetch(
-      `https://api.themoviedb.org/3/movie${selectedMovieID}/videos?language=en-US`,
+      `https://api.themoviedb.org/3/movie/${selectedMoviePath}/videos?language=en-US`,
       options
     )
       .then((response) => response.json())
       .then((movieTrailerObj) => {
         // Updating movie details in context
-        setVideo((prevDetails) => [...prevDetails, movieTrailerObj]);
+        return setVideo((prevDetails) => [...prevDetails, movieTrailerObj]);
       })
       .catch((error) => console.log(error));
   }, [selectedMovieID, setVideo]);
 
-  let videoPath = "";
+  let trailer =
+    video[0]?.results?.find(
+      (singleVideo) =>
+        singleVideo.type.toLowerCase() === "trailer" && singleVideo.official
+    ) || video[0]?.results[0];
 
-  console.log(video);
+  if (!trailer) {
+    return <div>Lade Trailer...</div>;
+  }
+
+  const { key: youtubeTrailerKey } = trailer;
 
   return (
     <>
@@ -51,9 +59,9 @@ const Trailer = () => {
         {/* <YouTube className="youtube" /> */}
         <div className="youtube">
           <iframe
-            src={`https://www.youtube.com/embed/${selectedMovieID.id}`}
+            src={`https://www.youtube.com/embed/${youtubeTrailerKey}`}
             allowFullScreen
-            frameborder="0"
+            frameBorder="0"
           ></iframe>
         </div>
       </section>
