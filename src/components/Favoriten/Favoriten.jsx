@@ -22,11 +22,18 @@ const Favoriten = () => {
     setFavorites(updatedFavorites);
   };
 
+  // Entferne doppelte Filme aus der Favoritenliste
+  const uniqueFavorites = favorites.filter(
+    (film, index) =>
+      index ===
+      favorites.findIndex((favFilm) => favFilm.id === film.id)
+  );
+
   return (
     <div className="favoriten-container">
       <h2>Meine Favoriten</h2>
       <div className="favorites-list">
-        {favorites.map((movie, index) => (
+        {uniqueFavorites.map((movie, index) => (
           <div key={index} className="favorite-item">
             <img
               className="Poster"
