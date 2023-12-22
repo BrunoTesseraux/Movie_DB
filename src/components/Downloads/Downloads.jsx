@@ -3,6 +3,7 @@ import { downloadDaten } from "../Downloads/DownloadsDaten";
 import NavBar from "../NavBar/NavBar";
 import { MovieContext } from "../Context/MovieContext";
 import "./Downloads.scss";
+import binred from "./../../assets/icons/binred.svg";
 
 const Download = () => {
   const { config } = useContext(MovieContext);
@@ -24,12 +25,15 @@ const Download = () => {
 
   return (
     <div className="download-container">
-      <h2>Heruntergeladene Filme</h2>
+      <h2 className="downloads-headline">Meine heruntergeladenen Filme</h2>
+      <p className="download-introtext">
+        Hier findest du alle Filme, die du dir gespeichert hast.
+      </p>
       <div className="downloaded-movies-list">
         {downloadedMovies.map((movie, index) => (
           <div key={index} className="downloaded-movie-item">
             <img
-              className="Poster"
+              className="poster"
               src={`${imageURL}${movie.poster_path}`}
               alt={`Bild des Films ${movie.title}`}
             />

@@ -1,6 +1,12 @@
 .main-home {
   margin-bottom: 6rem;
+  font-family: "Poppins-Rg";
 }
 h1 {
-  color: tan;
+  font-family: "Poppins-Bd";
+}
+.dark {
+  .main-home {
+    color: white;
+  }
 }

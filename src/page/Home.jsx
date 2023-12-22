@@ -12,7 +12,6 @@ const upcomingURL =
 import "./Home.scss";
 
 import SliderNetflixStyle from "../components/Slider/SliderNetflixStyle";
-import DarkMode from "../components/DarkMode/DarkMode";
 
 import { useContext, useEffect, useState } from "react";
 import Splash from "../components/Splash/Splash";
@@ -58,6 +57,23 @@ const Home = (onAllResultsChange) => {
     }
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
+  // Dass darkmode beim laden ausgeführt wird
+
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || "light";
+  });
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   return (
     <>
       {displaySplash ? (
@@ -67,7 +83,6 @@ const Home = (onAllResultsChange) => {
       ) : (
         <main className="main-home">
           <div>Welcome!</div>
-          <DarkMode />
           <Searchbar />
           <div className="heading-slider">
             <h1>Trending Movies</h1>
@@ -79,7 +94,7 @@ const Home = (onAllResultsChange) => {
           />
           <div className="heading-slider">
             <h1>Upcoming Movies</h1>
-            <a href="">See all</a>
+            <Link to="/alltrending">See all</Link>
           </div>
           <SliderNetflixStyle fetchUrl={upcomingURL} />
           <div className="heading-slider">
@@ -87,7 +102,6 @@ const Home = (onAllResultsChange) => {
             <Link to="/allupcoming">See all</Link>
           </div>
           <SliderNetflixStyle fetchUrl={trendingURL} />
-          <NavBar />
         </main>
       )}
     </>

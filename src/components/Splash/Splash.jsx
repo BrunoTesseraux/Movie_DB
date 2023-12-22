@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import "./Splash.scss";
 import { MovieContext } from "../Context/MovieContext";
+import logowhite from "./../../assets/logos/logowhite.svg";
 
 const Splash = () => {
   const { showSplash } = useContext(MovieContext);
@@ -13,7 +14,7 @@ const Splash = () => {
         showSplash ? "puff-in-center" : "puff-out-center"
       }`}
     >
-      <h1>SuperStream</h1>
+      <img src={logowhite} alt="" />
     </section>
   );
 };

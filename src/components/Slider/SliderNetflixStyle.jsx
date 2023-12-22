@@ -5,17 +5,20 @@ import rating from "./../../assets/icons/rating.svg";
 import { Link } from "react-router-dom";
 
 const SliderNetflixStyle = ({ fetchUrl }) => {
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const slidersRef = useRef(null);
   const ImagePadding = 20;
   const [slideData, setSlideData] = useState([]);
   const { config } = useContext(MovieContext);
 
+  const bearerToken = import.meta.env
+    .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
+
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzUwMzc4ZDNjYTc2YjBjMWU4YWEyODRlZmYzNzg3MCIsInN1YiI6IjY1NmY2YzRlOTQ2MzE4MDExZDhhMDQyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SDK0CwPNgeSykWhKcCVsJj-ZZk7fQWBt3pQBFB57XVI",
+      Authorization: `Bearer ${bearerToken}`,
     },
   };
 
@@ -54,7 +57,7 @@ const SliderNetflixStyle = ({ fetchUrl }) => {
     };
 
     fetchData();
-  }, [fetchUrl, options]);
+  }, []);
 
   const handleResize = () => {
     setInnerWidth(window.innerWidth);
@@ -97,17 +100,17 @@ const SliderNetflixStyle = ({ fetchUrl }) => {
                       ? `${config.images.secure_base_url}${config.images.backdrop_sizes[2]}${slide.backdrop_path}`
                       : `${config.images.secure_base_url}${config.images.poster_sizes[2]}${slide.poster_path}`
                   }
-                  alt={`Slide`}
+                  alt={`${slide.title}`}
                 />
               </div>
               <h2>
                 {innerWidth <= 992
                   ? slide.title.substring(0, 30)
-                  : slide.title.substring(0, 15)}
+                  : slide.title.substring(0, 14)}
               </h2>
               <div className="content-netflix">
                 <img className="rating_star" src={rating} alt="" />
-                <p>{slide.vote_average.toFixed(1)} / 10.0</p>
+                <p>{slide.vote_average.toFixed(1)}/10.0</p>
               </div>
             </Link>
           </div>
