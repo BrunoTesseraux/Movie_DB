@@ -6,18 +6,15 @@ import MovieListItem from "../MovieListItem/MovieListItem";
 import Searchbar from "../Searchbar/Searchbar";
 import NavBar from "../NavBar/NavBar";
 const MovieList = () => {
-  const { allMovies, setAllMovies, innerWidth, setGenreValue } =
-    useContext(MovieContext);
+  const { allMovies, innerWidth, setGenreValue } = useContext(MovieContext);
 
   const location = useLocation();
 
   useEffect(() => {
-    const moviesFromLocalStorage = localStorage.getItem("allMoviesLocal");
-    setAllMovies(JSON.parse(moviesFromLocalStorage));
     if (location.pathname !== "/movies") {
       setGenreValue(""); // Setzen Sie genreValue zurück
     }
-  }, [location, setGenreValue, setAllMovies]);
+  }, [location, setGenreValue]);
 
   return (
     <>
