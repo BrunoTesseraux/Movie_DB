@@ -36,13 +36,17 @@ const Home = (onAllResultsChange) => {
 
     if (loggedIn) {
       setIsLoggedIn(true);
+      setDisplaySplash(false);
+    } else if (isFirstVisit) {
+      localStorage.setItem("firstVisit", "no");
+      setShowSplash(true);
+      setTimeout(() => {
+        setShowSplash(false);
+        setTimeout(() => setDisplaySplash(false), 500);
+      }, 2000);
+    } else {
+      setDisplaySplash(false);
     }
-
-    setShowSplash(true);
-    setTimeout(() => {
-      setShowSplash(false);
-      setTimeout(() => setDisplaySplash(false), 500);
-    }, 2000);
 
     if (loggedIn === "true") {
       setIsLoggedIn(true);
