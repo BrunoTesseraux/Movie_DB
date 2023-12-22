@@ -36,3 +36,10 @@ body {
   margin: 0 auto;
   margin-inline: 5%;
 }
+
+
+@media (min-width: 1440px){
+  body{
+    margin-top: 50px;
+  }
+}
