@@ -1,18 +1,26 @@
 .download-container {
   margin-bottom: 80px;
 
-  h2 {
-    text-align: center;
-    padding: 40px;
+  .downloads-headline {
+    font-family: "Poppins-Bd";
+    text-align: left;
+    padding: 40px 40px 20px 40px;
     color: #fc2121;
   }
 
+  .download-introtext {
+    font-family: "Poppins-Rg";
+    text-align: left;
+    padding: 0 0px 0 40px;
+  }
+
   .downloaded-movies-list {
+    padding: 40px;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: center; /* Horizontale Ausrichtung in der Mitte */
-    align-items: center; /* Vertikale Ausrichtung in der Mitte */
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .downloaded-movie-item {
