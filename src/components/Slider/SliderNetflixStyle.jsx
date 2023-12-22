@@ -49,7 +49,7 @@ const SliderNetflixStyle = ({ fetchUrl }) => {
       fetch(fetchUrl, options)
         .then((response) => response.json())
         .then((data) => {
-          setSlideData(data.results);
+          setSlideData(data?.results);
         })
         .catch((error) => {
           console.error("Error fetching data:", error);

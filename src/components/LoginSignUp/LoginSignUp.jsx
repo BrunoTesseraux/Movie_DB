@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import "./LoginSignUp.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../Context/MovieContext";
 import { useNavigate } from "react-router-dom";
-
-import Registration from "../Registration/Registration";
-import logored2 from "./../../assets/logos/logored2.svg";
+import logoblack from "./../../assets/logos/logoblack.svg";
 import bg from "./../../assets/images/bg.avif";
 
 const LoginSignUp = () => {
@@ -16,9 +14,11 @@ const LoginSignUp = () => {
     setPassword,
     users,
     setUsers,
+    isLoggedIn,
     setIsLoggedIn,
     isActive,
     setIsActive,
+    hasAnimationPlayed,
     isNavigatingFromIntro,
     setIsNavigatingFromIntro,
   } = useContext(MovieContext);
@@ -49,6 +49,8 @@ const LoginSignUp = () => {
     setIsNavigatingFromIntro,
   ]);
 
+  var loggedInUser = "";
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -58,15 +60,26 @@ const LoginSignUp = () => {
     }
 
     let isUserValid = false;
-    let loggedInUser = null;
-
     for (const singleUser of users) {
       if (singleUser.email === email && singleUser.password === password) {
+        console.log(singleUser);
         isUserValid = true;
-        loggedInUser = singleUser; // Hier das gesamte Benutzerobjekt speichern
+        loggedInUser = {
+          username: singleUser.username,
+          email: singleUser.email,
+          address: singleUser.address,
+          birthdate: singleUser.birthdate,
+          firstname: singleUser.firstname,
+          lastname: singleUser.lastname,
+          password: singleUser.password,
+        };
+
         break;
       }
     }
+
+    setEmail("");
+    setPassword("");
 
     if (isUserValid) {
       localStorage.setItem("loggedIn", "true");
@@ -81,21 +94,27 @@ const LoginSignUp = () => {
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
+      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     } else if (e.target.textContent.toLowerCase() === "registration") {
       setIsActive(true);
+      console.log(isActive);
       localStorage.setItem("isActive", !isActive);
     }
   };
 
-  return (
-    <section className="section-wrapper">
-      <img src={bg} alt="" className="background" />
-      <section
-        className={`section-login ${isNavigatingFromIntro ? "animate" : ""}`}
-      >
-        <img src={logored2} alt="" className="login-logo" />
+  console.log(email);
+  console.log(password);
 
+  return (
+    <section className="log-section-wrapper">
+      <img src={bg} alt="" className="log-background" />
+      <section
+        className={`log-section-login ${
+          isNavigatingFromIntro ? "animate" : ""
+        }`}
+      >
+        <img src={logoblack} alt="" className="login-logo" />
         <div className="registration-signin">
           <Link
             to="/login"

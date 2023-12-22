@@ -49,8 +49,8 @@ const Profile = () => {
 
   return (
     <>
+      <DarkMode />
       <div className="profile-container">
-        <DarkMode />
         <div className="profile-header">
           <h1>Profil</h1>
         </div>
@@ -64,7 +64,7 @@ const Profile = () => {
             </h2>
             <p>Email: {loggedInUser.email}</p>
             {age && <p>Alter: {age}</p>}
-            <p>Adresse: {address}</p>
+            {/* <p>Adresse: {address}</p> */}
             <p>Geburtsdatum: {loggedInUser.birthdate}</p>
           </div>
         </div>

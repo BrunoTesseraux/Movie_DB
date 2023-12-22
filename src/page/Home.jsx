@@ -12,6 +12,7 @@ const upcomingURL =
 import "./Home.scss";
 
 import SliderNetflixStyle from "../components/Slider/SliderNetflixStyle";
+import DarkMode from "../components/DarkMode/DarkMode";
 
 import { useContext, useEffect, useState } from "react";
 import Splash from "../components/Splash/Splash";
@@ -30,23 +31,18 @@ const Home = (onAllResultsChange) => {
   // const [showSplash, setShowSplash] = useState(false);
 
   useEffect(() => {
-    const isFirstVisit = localStorage.getItem("firstVisit");
-    const loggedIn = localStorage.getItem("loggedIn");
+    const isFirstVisit = localStorage.getItem("firstVisit") === null;
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
 
-    console.log(loggedIn);
-
-    if (isFirstVisit) {
-      localStorage.setItem("firstVisit", "no");
-      setShowSplash(true);
-      // Verzögerung, um den Splash-Screen eine Weile anzuzeigen
-      setTimeout(() => {
-        setShowSplash(false);
-        // Warten auf die Dauer der Ausblend-Animation
-        setTimeout(() => setDisplaySplash(false), 500); // Angenommene Dauer der Ausblend-Animation
-      }, 2000); // Zeit, bis die Ausblend-Animation beginnt
-    } else {
-      setDisplaySplash(false);
+    if (loggedIn) {
+      setIsLoggedIn(true);
     }
+
+    setShowSplash(true);
+    setTimeout(() => {
+      setShowSplash(false);
+      setTimeout(() => setDisplaySplash(false), 500);
+    }, 2000);
 
     if (loggedIn === "true") {
       setIsLoggedIn(true);
@@ -57,23 +53,6 @@ const Home = (onAllResultsChange) => {
     }
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
-  // Dass darkmode beim laden ausgeführt wird
-
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme || "light";
-  });
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
-
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
-
   return (
     <>
       {displaySplash ? (
@@ -83,6 +62,7 @@ const Home = (onAllResultsChange) => {
       ) : (
         <main className="main-home">
           <div>Welcome!</div>
+          <DarkMode />
           <Searchbar />
           <div className="heading-slider">
             <h1>Trending Movies</h1>
@@ -94,7 +74,7 @@ const Home = (onAllResultsChange) => {
           />
           <div className="heading-slider">
             <h1>Upcoming Movies</h1>
-            <Link to="/alltrending">See all</Link>
+            <a href="">See all</a>
           </div>
           <SliderNetflixStyle fetchUrl={upcomingURL} />
           <div className="heading-slider">
@@ -102,6 +82,7 @@ const Home = (onAllResultsChange) => {
             <Link to="/allupcoming">See all</Link>
           </div>
           <SliderNetflixStyle fetchUrl={trendingURL} />
+          <NavBar />
         </main>
       )}
     </>

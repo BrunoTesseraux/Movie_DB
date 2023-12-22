@@ -5,6 +5,7 @@ import { favoritenDaten } from "./FavoritenDaten";
 import { MovieContext } from "../Context/MovieContext";
 import binwhite from "./../../assets/icons/binwhite.svg";
 import binred from "./../../assets/icons/binred.svg";
+import { Link } from "react-router-dom";
 
 const Favoriten = () => {
   const { config } = useContext(MovieContext);
@@ -38,7 +39,9 @@ const Favoriten = () => {
         Hier findest du alle Filme, die du dir gespeichert hast.
       </p>
       <div className="favorites-list">
+
         {uniqueFavorites.map((movie, index) => (
+     <Link to={`/detail/${movie.id}`}>
           <div key={index} className="favorite-item">
             <img
               className="poster"
@@ -52,6 +55,8 @@ const Favoriten = () => {
               <img src={binred} alt="" className="icon-bin" />
             </button>
           </div>
+           </Link>
+
         ))}
       </div>
       <NavBar />
