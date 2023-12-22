@@ -15,7 +15,7 @@ const DarkMode = () => {
     localStorage.setItem("theme", newTheme);
 
     // Ändern Sie den Button-Inhalt je nach Theme
-    setButtonContent(newTheme === "light" ? "🌙" : "🌑");
+    setButtonContent(newTheme === "light" ? "🌑" : "☀️");
   };
 
   useEffect(() => {
