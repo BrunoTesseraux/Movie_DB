@@ -37,10 +37,12 @@
     &.left-arrow {
       left: 10px;
       z-index: 999;
+      opacity: 0;
     }
 
     &.right-arrow {
       right: 10px;
+      opacity: 0;
     }
   }
 
