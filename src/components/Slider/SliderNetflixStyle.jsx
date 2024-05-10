@@ -11,8 +11,7 @@ const SliderNetflixStyle = ({ fetchUrl }) => {
   const [slideData, setSlideData] = useState([]);
   const { config } = useContext(MovieContext);
 
-  const bearerToken = import.meta.env
-    .VITE_AUTHENTICATION_BEARER_TOKEN_THE_MOVIE_DB;
+  const bearerToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZDVlNWFlZTZkMjY5M2ExNTBkOTk2OWMzMGUwNmRhZiIsInN1YiI6IjY1YzkxMTY0OThmMWYxMDE2MmQ3YjU2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q6K2urfq5WwsbXnrl5874YUchOd_kUuyD4UDF4y0Ikg"
 
   const options = {
     method: "GET",

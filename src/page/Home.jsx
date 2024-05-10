@@ -73,8 +73,8 @@ const Home = (onAllResultsChange) => {
           <Link to="/" className=" main-container">
             <img src={logo} alt="logo" className="logo" />
           </Link>
-          <h1 className="primary-headline main-container">Welcome!</h1>
           <DarkMode />
+          <h1 className="primary-headline main-container">Welcome!</h1>
           <Searchbar />
           <div className="heading-slider">
             <h2 className="sub-headline">Trending Movies</h2>
