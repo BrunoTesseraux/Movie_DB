@@ -1,6 +1,11 @@
 import { useContext } from "react";
 import Searchbar from "../Searchbar/Searchbar";
 import "./NavBar.scss";
+import HomeIcon from "./../../assets/SVG/Home.svg";
+import VectorIcon from "./../../assets/SVG/Vector.svg";
+import DownloadIcon from "./../../assets/SVG/Download.svg";
+import ProfileIcon from "./../../assets/SVG/Profile.svg";
+
 
 import { Link, useLocation } from "react-router-dom";
 import { MovieContext } from "../Context/MovieContext";
@@ -19,7 +24,7 @@ const NavBar = () => {
       >
         <div className="imageContainer">
           <img
-            src="src/assets/SVG/Home.svg"
+            src={HomeIcon}
             alt="Home"
             className={`homeImage navImage ${
               location.pathname === "/home" ? "active" : ""
