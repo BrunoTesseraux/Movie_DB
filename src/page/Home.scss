@@ -32,3 +32,8 @@
 .hidden {
   opacity: 0;
 }
+@media (max-width: 768px) {
+  .logo{
+    width: 45px;
+  }
+}

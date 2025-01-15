@@ -16,6 +16,7 @@ import Splash from "../components/Splash/Splash";
 import { MovieContext } from "../components/Context/MovieContext";
 import Intro from "../components/Intro/Intro";
 import LoginSignUp from "../components/LoginSignUp/LoginSignUp";
+import FetchMovies from "../components/FetchData/FetchMovies";
 
 const Home = (onAllResultsChange) => {
   const trendingURL =
@@ -70,6 +71,7 @@ const Home = (onAllResultsChange) => {
         <Intro />
       ) : (
         <main className="main-home">
+          <FetchMovies/>
 
           <Searchbar />
           <div className="heading-slider">
