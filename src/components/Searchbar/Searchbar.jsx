@@ -4,10 +4,19 @@ import "./Searchbar.scss";
 import searchIcon from "../../assets/icons/search-icon.svg";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
+import DarkMode from "../DarkMode/DarkMode";
+import logoblack from "../../assets/logos/logoblack.svg";
+import logowhite from "../../assets/logos/logowhite.svg";
+
+
 
 const Searchbar = () => {
   const { genres, genreValue, setGenreValue, searchTerm, setSearchTerm } =
     useContext(MovieContext);
+
+    const currentTheme = localStorage.getItem("theme");
+        
+    const logo = currentTheme === "dark" ? logowhite : logoblack;
 
   const location = useLocation();
 
@@ -30,6 +39,9 @@ const Searchbar = () => {
     <>
       <section className="section-search-bar main-container">
         <div className="search-wrapper ">
+          <Link to="/" className=" main-container">
+            <img src={logo} alt="logo" className="logo" />
+          </Link>
           <input
             ref={inputRef}
             type="search"
@@ -41,6 +53,7 @@ const Searchbar = () => {
             onChange={handleSearch}
           />
           <img src={searchIcon} alt="search-icon" className="search-icon" />
+          <DarkMode />
         </div>
         <div className="genres-wrapper">
           {genres?.genres?.map((genre, index) =>
