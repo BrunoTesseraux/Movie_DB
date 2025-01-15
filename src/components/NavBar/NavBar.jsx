@@ -19,7 +19,7 @@ const NavBar = () => {
       >
         <div className="imageContainer">
           <img
-            src="src/components/SVG/Home.svg"
+            src="src/assets/SVG/Home.svg"
             alt="Home"
             className={`homeImage navImage ${
               location.pathname === "/home" ? "active" : ""
@@ -34,7 +34,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/components/SVG/Vector.svg"
+          src="src/assets/SVG/Vector.svg"
           alt="Vector"
           className="navImage"
         />
@@ -46,7 +46,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/components/SVG/Download.svg"
+          src="src/assets/SVG/Download.svg"
           alt="Download"
           className="navImage"
         />
@@ -58,7 +58,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/components/SVG/Profile.svg"
+          src="src/assets/SVG/Profile.svg"
           alt="Profile"
           className="navImage"
         />

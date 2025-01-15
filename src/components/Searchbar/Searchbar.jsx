@@ -16,7 +16,7 @@ const Searchbar = () => {
 
     const currentTheme = localStorage.getItem("theme");
         
-    const logo = currentTheme === "dark" ? logowhite : logoblack;
+    // const logo = currentTheme === "dark" ? logowhite : logoblack;
 
   const location = useLocation();
 
@@ -27,7 +27,7 @@ const Searchbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    searchTerm.length >= 1 ? navigate("/movies") : null;
+    searchTerm.length >= 3 ? navigate("/movies") : null;
     inputRef.current.focus();
   }, [genreValue, searchTerm]);
 
@@ -40,7 +40,7 @@ const Searchbar = () => {
       <section className="section-search-bar main-container">
         <div className="search-wrapper ">
           <Link to="/" className=" main-container">
-            <img src={logo} alt="logo" className="logo" />
+            <img src={logoblack} alt="logo" className="logo" />
           </Link>
           <input
             ref={inputRef}

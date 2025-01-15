@@ -4,9 +4,7 @@
   .profile-text {
     color: #fff;
   }
-  .dark-mode-button {
-    background: #2b2b2b;
-  }
+
   .carusel {
     .switch-left,
     .switch-right {
@@ -37,9 +35,13 @@
 
 .dark-mode-button {
   color: #fff;
+  background-color: rgba(255, 255, 255, 0);
   padding: 15px 15px;
   border-radius: 10px;
   border: none;
   font-size: 18px;
-  box-shadow: 1px 2px 6px #00000020;
+  transition: scale 0.3s;
+  &:hover{
+    scale: 2;
+  }
 }

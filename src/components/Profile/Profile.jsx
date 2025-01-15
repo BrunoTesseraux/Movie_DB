@@ -60,7 +60,7 @@ const Profile = () => {
             </div>
             <div className="profile-picture">
               <img
-                src="src\components\SVG\mac mussterman.jpg"
+                src="src\assets\SVG\mac mussterman.jpg"
                 alt="Profilbild"
               />
             </div>
