@@ -3,6 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgprofile from "./../../assets/images/bgprofile.jpeg";
+import profilbild from "./../../assets/SVG/mac mussterman.jpg"
 
 import "./Profile.scss";
 
@@ -60,7 +61,7 @@ const Profile = () => {
             </div>
             <div className="profile-picture">
               <img
-                src="src\assets\SVG\mac mussterman.jpg"
+                src={profilbild}
                 alt="Profilbild"
               />
             </div>
