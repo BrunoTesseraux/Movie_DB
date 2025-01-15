@@ -91,6 +91,41 @@ const LoginSignUp = () => {
     }
   };
 
+
+  useEffect(() => {
+    // Define a predefined test user
+    const testUser = {
+      firstname: "Test",
+      lastname: "User",
+      email: "testuser@example.com",
+      password: "testpassword123",
+      address: {
+        street: "123 Test St",
+        houseNumber: "1",
+        postalCode: "12345",
+        country: "Testland",
+      },
+      birthdate: "1990-01-01",
+    };
+  
+    // Check if the user is already in local storage
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+  
+    // Add test user if not present
+    const userExists = existingUsers.some(
+      (user) => user.email === testUser.email
+    );
+    if (!userExists) {
+      existingUsers = [...existingUsers, testUser];
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+    }
+  
+    // Pre-fill the login form with the test user's credentials
+    setEmail(testUser.email);
+    setPassword(testUser.password);
+  }, []); // Run only once on component mount
+
+
   const saveIsActiveValue = (e) => {
     if (e.target.textContent.toLowerCase() === "sign in") {
       setIsActive(false);
