@@ -39,7 +39,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/assets/SVG/Vector.svg"
+          src={VectorIcon}
           alt="Vector"
           className="navImage"
         />
@@ -51,7 +51,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/assets/SVG/Download.svg"
+          src={DownloadIcon}
           alt="Download"
           className="navImage"
         />
@@ -63,7 +63,7 @@ const NavBar = () => {
         }`}
       >
         <img
-          src="src/assets/SVG/Profile.svg"
+          src={ProfileIcon}
           alt="Profile"
           className="navImage"
         />
