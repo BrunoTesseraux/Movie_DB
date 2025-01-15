@@ -3,11 +3,8 @@ import MovieList from "../components/MovieList/MovieList";
 import NavBar from "../components/NavBar/NavBar";
 import Searchbar from "../components/Searchbar/Searchbar";
 import SliderComponent from "../components/Slider/SliderComponent";
-
-const trendingURL =
-  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-const upcomingURL =
-  "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+import logoblack from "../assets/logos/logoblack.svg";
+import logowhite from "../assets/logos/logored2.svg";
 
 import "./Home.scss";
 
@@ -21,6 +18,12 @@ import Intro from "../components/Intro/Intro";
 import LoginSignUp from "../components/LoginSignUp/LoginSignUp";
 
 const Home = (onAllResultsChange) => {
+  const trendingURL =
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
+  const upcomingURL =
+    "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+
+  const currentTheme = localStorage.getItem("theme");
   const {
     setShowSplash,
     displaySplash,
@@ -57,6 +60,8 @@ const Home = (onAllResultsChange) => {
     }
   }, [setShowSplash, isLoggedIn, setIsLoggedIn]);
 
+  const logo = currentTheme === "dark" ? logowhite : logoblack;
+
   return (
     <>
       {displaySplash ? (
@@ -65,11 +70,10 @@ const Home = (onAllResultsChange) => {
         <Intro />
       ) : (
         <main className="main-home">
-          <div>Welcome!</div>
-          <DarkMode />
+
           <Searchbar />
           <div className="heading-slider">
-            <h1>Trending Movies</h1>
+            <h2 className="sub-headline">Trending Movies</h2>
             <Link to="/movies">See all</Link>
           </div>
           <SliderComponent
@@ -77,12 +81,12 @@ const Home = (onAllResultsChange) => {
             onAllResultsChange={onAllResultsChange}
           />
           <div className="heading-slider">
-            <h1>Upcoming Movies</h1>
+            <h2 className="sub-headline">Upcoming Movies</h2>
             <a href="">See all</a>
           </div>
           <SliderNetflixStyle fetchUrl={upcomingURL} />
           <div className="heading-slider">
-            <h1>Trending Movies</h1>
+            <h2 className="sub-headline">Trending Movies</h2>
             <Link to="/allupcoming">See all</Link>
           </div>
           <SliderNetflixStyle fetchUrl={trendingURL} />

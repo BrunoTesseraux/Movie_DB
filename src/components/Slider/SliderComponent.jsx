@@ -16,7 +16,7 @@ const SliderComponent = ({ fetchUrl }) => {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMzUwMzc4ZDNjYTc2YjBjMWU4MWEyODRlZmYzNzg3MCIsInN1YiI6IjY1NmY2YzRlOTQ2MzE4MDExZDhhMDQyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SDK0CwPNgeSykWhKcCVsJj-ZZk7fQWBt3pQBFB57XVI",
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZDVlNWFlZTZkMjY5M2ExNTBkOTk2OWMzMGUwNmRhZiIsInN1YiI6IjY1YzkxMTY0OThmMWYxMDE2MmQ3YjU2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.q6K2urfq5WwsbXnrl5874YUchOd_kUuyD4UDF4y0Ikg",
     },
   };
 
@@ -36,7 +36,7 @@ const SliderComponent = ({ fetchUrl }) => {
 
     const intervalId = setInterval(() => {
       goToNext();
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, [fetchUrl, currentIndex]);

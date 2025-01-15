@@ -2,6 +2,7 @@ import DarkMode from "../DarkMode/DarkMode";
 import NavBar from "../NavBar/NavBar";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bgprofile from "./../../assets/images/bgprofile.jpeg";
 
 import "./Profile.scss";
 
@@ -49,28 +50,36 @@ const Profile = () => {
 
   return (
     <>
-      <div className="profile-container">
-        <div className="top-bild"></div>
-        <DarkMode />
-        <div className="profile-content">
-          <div className="profile-header">
-            <h1>Profil</h1>
-          </div>
-          <div className="profile-picture">
-            <img src="src\components\SVG\mac mussterman.jpg" alt="Profilbild" />
-          </div>
-          <div className="profile-info">
-            <h2>
-              {loggedInUser.firstname} {loggedInUser.lastname}
-            </h2>
-            <p>Email: {loggedInUser.email}</p>
-            {age && <p>Alter: {age}</p>}
-            {/* <p>Adresse: {address}</p> */}
-            <p>Geburtsdatum: {loggedInUser.birthdate}</p>
+      <section className="profile-wrapper">
+        <img src={bgprofile} alt="" className="header-profile" />
+        <div className="profile-container">
+          <div className="top-bild"></div>
+          <div className="profile-content">
+            <div className="profile-header">
+              <h1 className="profile-headline">Willkommen in deinem Profil.</h1>
+            </div>
+            <div className="profile-picture">
+              <img
+                src="src\components\SVG\mac mussterman.jpg"
+                alt="Profilbild"
+              />
+            </div>
+            <div className="profile-info">
+              <DarkMode className="darkmode-aussehen" />
+              <h2 className="profile-name">
+                {loggedInUser.firstname} {loggedInUser.lastname}
+              </h2>
+              <p className="profile-text">Email: {loggedInUser.email}</p>
+              {age && <p className="profile-text">Alter: {age}</p>}
+              {/* <p>Adresse: {address}</p> */}
+              <p className="profile-text">
+                Geburtsdatum: {loggedInUser.birthdate}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <NavBar />
+        <NavBar />
+      </section>
     </>
   );
 };
